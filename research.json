@@ -234,6 +234,15 @@
     {"tema": "Talles", "detalle": "Sólo el chaleco muestra XS–4XL; el resto sin dato legible.", "resolucion": "Placeholder marcado en products.json (sizes_is_placeholder)."}
   ],
 
+  "datos_de_ejemplo_agregados_2026-10-14": {
+    "motivo": "Pedido del titular: completar pendientes con datos inventados para la demo. NO son datos del negocio y hay que reemplazarlos antes de publicar como reales.",
+    "tarp_toldo_precio": "$38.000 (no figuraba en el catálogo)",
+    "bolsa_de_dormir_peso": "900 g (suposición razonable del error '900 kg')",
+    "hamaca_paraguaya": "descripción, características y specs redactadas de ejemplo",
+    "tabla_de_talles": "valores en cm de ejemplo para XS a 4XL (SIZE_CHART en src/data/sizes.ts)",
+    "no_inventado": "Ciudad, dirección y fotos reales de producto: siguen pendientes."
+  },
+
   "assets_reales_obtenidos": [
     {"archivo": "logo", "fuente": "Instagram (foto de perfil)", "resolucion": "100x100", "uso": "header, footer, favicon"},
     {"archivo": "hero-ruta", "fuente": "Portada del catálogo de WhatsApp", "resolucion": "600x600", "uso": "hero (limitado a ~600 px de ancho)"}

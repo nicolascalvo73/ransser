@@ -1,5 +1,5 @@
 ---
-import { SIZE_MEASURES } from '../../data/sizes';
+import { SIZE_CHART, SIZE_MEASURES } from '../../data/sizes';
 
 interface Props {
   sizes: string[];
@@ -21,10 +21,10 @@ const { sizes, placeholder = false } = Astro.props;
       </thead>
       <tbody>
         {
-          SIZE_MEASURES.map((m) => (
+          SIZE_MEASURES.map((m, i) => (
             <tr>
               <th scope="row">{m}</th>
-              {sizes.map(() => (<td>—</td>))}
+              {sizes.map((s) => (<td>{SIZE_CHART[s]?.[i] ?? '—'}</td>))}
             </tr>
           ))
         }
@@ -32,7 +32,7 @@ const { sizes, placeholder = false } = Astro.props;
     </table>
   </div>
   <p class="sizes__note">
-    {placeholder ? 'Talles y medidas de ejemplo: se confirman con la tabla real del producto.' : 'Medidas por confirmar con la tabla real de Ransser.'}
+    {placeholder ? 'Talles y medidas de ejemplo: se confirman con la tabla real del producto.' : 'Medidas de ejemplo: se confirman con la tabla real de Ransser.'}
   </p>
 </div>
 
