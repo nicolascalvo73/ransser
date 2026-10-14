@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.astro/
+.playwright-mcp/
+raw/
+.DS_Store
+img/
+.playwright-mcp/
+e2e-*.png

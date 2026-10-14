@@ -1,0 +1,23 @@
+---
+interface Props {
+  variant?: 'primary' | 'ghost' | 'wa';
+  href?: string;
+  block?: boolean;
+  type?: 'button' | 'submit';
+  [attr: string]: unknown;
+}
+const { variant = 'primary', href, block = false, type = 'button', class: cls, ...rest } = Astro.props;
+const classes = ['btn', `btn--${variant}`, block && 'btn--block', cls].filter(Boolean).join(' ');
+---
+
+{
+  href ? (
+    <a class={classes} href={href} {...rest}>
+      <slot />
+    </a>
+  ) : (
+    <button class={classes} type={type} {...rest}>
+      <slot />
+    </button>
+  )
+}

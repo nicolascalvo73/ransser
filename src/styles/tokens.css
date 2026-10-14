@@ -1,0 +1,40 @@
+:root {
+  /* Color — ver design.md §1 */
+  --bg: #0e0f10;
+  --surface: #17191b;
+  --surface-2: #202326;
+  --line: #2e3236;
+  --text: #f1efea;
+  --text-2: #a7abae;
+  --coral: #e45a52;
+  --coral-dark: #c94840;
+  --olive: #5e6e3b;
+  --olive-light: #9db06a;
+  --sand: #cdbf9b;
+  --navy: #1f2f46;
+  --fluo: #d4ff2a;
+  --wa: #25d366;
+  --danger: #ff8a80;
+
+  /* Tipografía */
+  --font-display: 'Saira Extra Condensed', 'Arial Narrow', sans-serif;
+  --font-body: 'Inter Variable', system-ui, sans-serif;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-lg: 1.125rem;
+  --fs-h3: clamp(1.4rem, 1.2rem + 1vw, 1.9rem);
+  --fs-h2: clamp(2rem, 1.5rem + 2.5vw, 3.2rem);
+  --fs-h1: clamp(2.7rem, 1.8rem + 5vw, 5.2rem);
+
+  /* Espaciado / forma */
+  --gutter: 1rem;
+  --radius: 0.75rem;
+  --radius-sm: 0.5rem;
+  --max: 72rem;
+  --tap: 2.75rem; /* 44 px */
+  --shadow: 0 10px 30px rgb(0 0 0 / 45%);
+}
+
+@media (min-width: 768px) {
+  :root { --gutter: 1.5rem; }
+}

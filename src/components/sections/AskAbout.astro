@@ -1,0 +1,32 @@
+---
+import { ASK_ABOUT, SITE } from '../../data/site';
+import { askAboutMessage, whatsappHref } from '../../lib/whatsapp';
+import Icon from '../ui/Icon.astro';
+---
+
+<section class="section" aria-labelledby="ask-title">
+  <div class="container">
+    <p class="eyebrow">También lo hacemos</p>
+    <h2 id="ask-title">Lo viste en Instagram?</h2>
+    <p class="lead">Estos productos no están en la tienda todavía. Preguntanos por WhatsApp y te pasamos precio y talles.</p>
+    <ul class="chips">
+      {
+        ASK_ABOUT.map((a) => (
+          <li>
+            <a class="chip" href={whatsappHref(SITE.whatsapp, askAboutMessage(a.name))} target="_blank" rel="noopener">
+              <Icon name="whatsapp" size={16} /> {a.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  h2 { margin-block: 0.4rem 0.75rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+  .chip { display: inline-flex; align-items: center; gap: 0.5rem; min-height: var(--tap); padding-inline: 1rem; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); text-decoration: none; font-weight: 600; }
+  .chip:hover { border-color: var(--wa); }
+  .chip :global(svg) { color: var(--wa); }
+</style>

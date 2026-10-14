@@ -1,0 +1,241 @@
+{
+  "meta": {
+    "fecha_research": "2026-10-14",
+    "fecha_captura_datos": "2026-10-01",
+    "negocio": "Ransser Indumentaria",
+    "vertical": "catalogo_y_venta_tienda_propia",
+    "slug": "ransser",
+    "deploy": "https://labs.mondistudio.com.ar/ransser",
+    "fuentes_revisadas": {
+      "capturas_locales": "37 imágenes en ./img/ (el prompt decía ./referencias/, que no existe): feed y perfil de Instagram, catálogo de WhatsApp (listados por sección, fichas con fotos, descripciones completas y precios)",
+      "instagram": "https://www.instagram.com/ransser.indumentaria/ (HTML público sin login: sólo foto de perfil 100x100 vía og:image)",
+      "whatsapp_catalogo": "https://wa.me/c/5493462543591 (redirige a whatsapp.com/catalog; el catálogo sólo se ve en la app, el HTML público trae únicamente la imagen de portada 600x600)"
+    },
+    "fuentes_no_revisadas": [
+      "Google Maps / Google Business: no hay ficha identificada para confirmar ciudad, dirección ni horarios",
+      "Posteos y Reels individuales de Instagram (requieren login)",
+      "Sitio web propio: no se encontró ninguno; el link de la bio es wa.me/5493462543591"
+    ],
+    "regla_de_prioridad": "Ante contradicciones prevalecen los datos del prompt; las capturas completan lo que el prompt no trae."
+  },
+
+  "bloque_1_datos_duros": {
+    "nombre": "Ransser",
+    "nombre_comercial_completo": "Ransser Indumentaria",
+    "instagram": {
+      "handle": "ransser.indumentaria",
+      "url": "https://www.instagram.com/ransser.indumentaria",
+      "publicaciones": 224,
+      "seguidores": 8180,
+      "seguidos": 6477,
+      "categoria": "Ropa (marca)",
+      "bio": "Indumentaria y accesorios para moteros · Consultas por MD · Envíos a todo el país",
+      "historias_destacadas": ["MUSLERAS", "CAMPERA 4Ss", "CAMISACO"],
+      "capturado": "2026-10-01"
+    },
+    "whatsapp": {
+      "numero_internacional": "5493462543591",
+      "formato_visible": "+54 9 3462 54-3591",
+      "catalogo": "https://wa.me/c/5493462543591",
+      "nota": "El WhatsApp es un perfil Business con catálogo: secciones Camping, Indumentaria, Outlet de Indumentaria y Combos En Promo."
+    },
+    "ciudad": {
+      "valor": "Venado Tuerto, Santa Fe (probable)",
+      "confianza": "baja",
+      "evidencia": "código de área 3462 y una geoetiqueta parcialmente visible en una captura del feed",
+      "accion": "Confirmar en Google Maps/Business. El sitio NO la afirma: sólo dice 'envíos a todo el país'."
+    },
+    "logo": {
+      "descripcion": "Velocímetro con alas y leyenda RANSSER / 1993, en coral-naranja sobre negro",
+      "fuente": "foto de perfil de Instagram (og:image), 100x100 px",
+      "color_coral_muestreado": "#E45A52",
+      "limitacion": "Sólo hay 100x100 px público. Sirve hasta ~48 px de alto en pantalla (2x). Para usos grandes pedir el archivo vectorial al cliente."
+    },
+    "contexto_de_produccion": {
+      "afirmacion_permitida": "La carpa dice textualmente 'producto 100% argentino y se hace por pedido'. Eso sí puede usarse, sólo para la carpa.",
+      "afirmacion_NO_confirmada": "Fabricación propia de toda la línea (en los videos se ve taller con máquina de coser y mesa de corte). No se afirma en el copy hasta confirmarlo.",
+      "alerta_1993": "'1993' figura en el logo, pero no hay evidencia de que sea el año de fundación (el dueño aparenta ser más joven; podría ser un año personal). El copy NO dice 'desde 1993'."
+    },
+    "duenio": "Aparece hablándole a cámara en los Reels (nombre no confirmado; el sitio no lo nombra). En la captura de WhatsApp aparece también 'Cami' con campera 4S y pantalón gabardina."
+  },
+
+  "bloque_2_catalogo": {
+    "moneda": "ARS",
+    "vigencia_precios": "relevados el 2026-10-01; se muestran como 'precios de ejemplo' en el sitio",
+    "secciones_del_catalogo_whatsapp": ["Camping", "Indumentaria", "Outlet de Indumentaria", "Combos En Promo"],
+    "productos": [
+      {
+        "id": "tarp-toldo",
+        "seccion": "camping",
+        "nombre": "Tarp / toldo multiusos",
+        "precio": null,
+        "precio_nota": "No visible en el catálogo: se muestra 'Consultar precio'.",
+        "descripcion_catalogo": "Es un toldo multiusos, cubre carpa, cubre moto, techo por si tenés lluvia o mucho sol, y 100 usos más que podés descubrir vos. Mide 3x3 mts abierto y 15x25cm enrollado y es aislante de temperatura, como el calor o el frío. Y es insoportable. ('insoportable' parece un error por 'indestructible/impermeable': no se usa.)",
+        "medidas": "3 x 3 m abierto · 15 x 25 cm enrollado",
+        "talles": null,
+        "foto_real": "no descargable (sólo captura)"
+      },
+      {
+        "id": "hamaca-paraguaya",
+        "seccion": "camping",
+        "nombre": "Hamaca paraguaya",
+        "precio": 42000,
+        "descripcion_catalogo": "Sin descripción visible en las capturas (la ficha no se abrió).",
+        "talles": null,
+        "foto_real": "no descargable"
+      },
+      {
+        "id": "bolsa-de-dormir",
+        "seccion": "camping",
+        "nombre": "Bolsa de dormir",
+        "precio": 110000,
+        "precio_anterior": null,
+        "precio_anterior_nota": "La captura muestra tachado ARS 12.000.000: error evidente del catálogo. Se descarta y no se muestra descuento.",
+        "descripcion_catalogo": "La bolsa de dormir de RANSSER es ideal para los viajes ya que ocupa poco lugar y es muy abrigada, ya que cuenta con un sistema triple capa.",
+        "medidas": "Packeada 24 x 17 cm",
+        "peso": null,
+        "peso_nota": "La imagen dice 'Peso: 900 kg': error evidente (probablemente 900 g). Placeholder 'a confirmar' en el sitio.",
+        "talles": null,
+        "foto_real": "no descargable"
+      },
+      {
+        "id": "carpa-2-personas",
+        "seccion": "camping",
+        "nombre": "Carpa 2 personas",
+        "precio": 280000,
+        "precio_anterior": 440000,
+        "descripcion_catalogo": "Medidas de base: 2x1,60 mts y altura 1,40 mts, es un producto 100% argentino y se hace por pedido!",
+        "medidas": "Base 2 x 1,60 m · altura 1,40 m",
+        "talles": null,
+        "foto_real": "no descargable"
+      },
+      {
+        "id": "combo-tarp-bolsa",
+        "seccion": "camping",
+        "nombre": "Combo Tarp + Bolsa de dormir",
+        "precio": 150000,
+        "descripcion_catalogo": "Sin descripción. Sección 'Combos En Promo' del catálogo.",
+        "nota": "No figuraba en el prompt: sale de las capturas del catálogo. Se incluye como combo dentro de Camping.",
+        "talles": null,
+        "foto_real": "no descargable"
+      },
+      {
+        "id": "camisa-con-proteccion",
+        "seccion": "indumentaria",
+        "nombre": "Camisa con protección",
+        "precio": 125000,
+        "precio_anterior": 135000,
+        "descripcion_catalogo": "Camisa de gabardina con protección en codos, hombros y espalda.",
+        "talles": "Tabla de talles disponible en la ficha (imagen ilegible): placeholder",
+        "foto_real": "no descargable"
+      },
+      {
+        "id": "pantalon-4-estaciones-softshell",
+        "seccion": "indumentaria",
+        "nombre": "Pantalón 4 estaciones de softshell",
+        "precio": 180000,
+        "precio_anterior": 195000,
+        "descripcion_catalogo": "Trae protección en rodillas y cadera, las cuales son desmontables.",
+        "talles": "placeholder",
+        "foto_real": "no descargable"
+      },
+      {
+        "id": "chaleco-ruta-40",
+        "seccion": "indumentaria",
+        "nombre": "Chaleco Ruta 40",
+        "precio": 70000,
+        "descripcion_catalogo": "Chaleco de matelasé con bordado de la ruta 40, trae 3 bolsillos.",
+        "talles": ["XS", "S", "M", "L", "XL", "2XL", "3XL", "4XL"],
+        "talles_nota": "La ficha tiene tabla de talles de XS a 4XL con 4 medidas (largo de pecho, ancho de hombros, largo de manga, largo de espalda). Los valores no se leen en la captura: la tabla del sitio los deja como 'a confirmar'.",
+        "foto_real": "no descargable"
+      },
+      {
+        "id": "campera-softshell-4-estaciones",
+        "seccion": "indumentaria",
+        "nombre": "Campera softshell 4 estaciones",
+        "precio": 240000,
+        "precio_anterior": 250000,
+        "descripcion_catalogo": "Trae protección en codos, hombros y espalda, y son desmontables al igual que el abrigo. Es impermeable y aislante al frío.",
+        "talles": "Tabla de talles disponible en la ficha (imagen ilegible): placeholder",
+        "foto_real": "no descargable"
+      },
+      {
+        "id": "outlet-campera-4-estaciones",
+        "seccion": "outlet",
+        "nombre": "Campera 4 estaciones (cordura antidesgarro)",
+        "precio": 120000,
+        "descripcion_catalogo": "Campera de cordura antidesgarro 4 estaciones con abrigo desmontable, al igual que sus protecciones.",
+        "detalle_visual": "Negra con reflectivos amarillo flúor y logo rojo en el pecho",
+        "talles": "placeholder",
+        "foto_real": "no descargable"
+      },
+      {
+        "id": "outlet-campera-4-estaciones-reflectiva",
+        "seccion": "outlet",
+        "nombre": "Campera 4 estaciones de cordura (variante reflectiva)",
+        "precio": 120000,
+        "descripcion_catalogo": "Campera 4 estaciones de cordura con abrigo desmontable, al igual que las protecciones.",
+        "detalle_visual": "Gris claro y negra con franja amarillo flúor",
+        "talles": "placeholder",
+        "foto_real": "no descargable"
+      },
+      {
+        "id": "outlet-campera-mujer-4-estaciones",
+        "seccion": "outlet",
+        "nombre": "Campera mujer 4 estaciones",
+        "precio": 120000,
+        "descripcion_catalogo": "Campera de cordura antidesgarro con abrigo desmontable, al igual que las protecciones.",
+        "detalle_visual": "Negra con paneles violeta",
+        "talles": "placeholder",
+        "foto_real": "no descargable"
+      }
+    ],
+    "vistos_en_instagram_sin_precio": [
+      "Traje de lluvia compacto",
+      "Mochilas / alforjas oliva",
+      "Musleras",
+      "Camisaco",
+      "Hamaca con mosquitero",
+      "Tarp 3x3"
+    ],
+    "tratamiento_en_el_sitio": "Los 'vistos en Instagram' no se venden en la tienda: aparecen como accesos 'Consultá por WhatsApp' con mensaje prellenado, sin precio inventado."
+  },
+
+  "bloque_3_perfil_estetico": {
+    "paleta": {
+      "base": ["negro / carbón dominante"],
+      "acento_principal": "naranja-coral del logo #E45A52",
+      "secundario": "verde oliva (tarps, mochilas, camisa)",
+      "apoyo": ["arena / khaki", "azul marino", "gris"],
+      "acentos_puntuales": ["amarillo flúor (reflectivos del outlet)", "bordó y rojo (hamaca y bolsa de dormir)", "violeta (campera mujer)"]
+    },
+    "fotografia": "Real y casera: viajes por caminos de tierra y camping con moto, selfies y Reels con el dueño hablándole a cámara, fotos de producto sobre fondo blanco para las camperas. Sin estudio ni estilo corporativo.",
+    "tono": "Cercano, voseo, directo, de motoviajero. Ejemplos textuales: 'Viajás en moto?', 'Hablame al privado', 'Lindo para el viaje', 'Descansar un ratito', 'Mochila para la aventura'. Sin lenguaje corporativo.",
+    "formatos_de_contenido_recurrentes": ["Reels hablándole a cámara", "'Tarp 3x3'", "'Traje de lluvia compacto'", "'Liquidación'", "'Importante para viajar'"]
+  },
+
+  "bloque_4_referencias_del_rubro": {
+    "estado": "Pendiente de revisión visual en vivo; criterio y marcas a mirar durante el diseño.",
+    "marcas_a_mirar": ["indumentaria adventure/touring para moto", "camping ligero para moto (tarps, hamacas)", "estética outdoor oscura"],
+    "que_tomar": ["fichas con protecciones/propiedades en íconos", "tabla de talles legible", "filtro por categoría simple", "fotos reales en uso como prueba social"],
+    "que_evitar": ["estética de showroom/corporativa", "stock-photos", "textos largos de marketing"]
+  },
+
+  "bloque_5_contradicciones_y_pendientes": [
+    {"tema": "Carpeta de referencias", "detalle": "El prompt dice ./referencias/ pero las imágenes están en ./img/.", "resolucion": "Se leyeron todas desde ./img/. La carpeta queda fuera del repo (.gitignore)."},
+    {"tema": "Precio tachado de la bolsa de dormir", "detalle": "ARS 12.000.000 en la ficha.", "resolucion": "Error evidente: se descarta, sin descuento mostrado."},
+    {"tema": "Peso de la bolsa de dormir", "detalle": "'Peso: 900 kg'.", "resolucion": "Placeholder 'a confirmar' (probable 900 g)."},
+    {"tema": "Combo Tarp + Bolsa de dormir", "detalle": "$150.000 en el catálogo, ausente del prompt.", "resolucion": "Incluido en Camping."},
+    {"tema": "Fabricación propia", "detalle": "Sugerida por los videos; sólo la carpa dice 'hecho por pedido'.", "resolucion": "No se afirma en general."},
+    {"tema": "Año 1993", "detalle": "Está en el logo, no es dato de fundación verificado.", "resolucion": "No se usa como 'desde 1993'."},
+    {"tema": "Ciudad", "detalle": "Venado Tuerto es sólo una inferencia.", "resolucion": "No se afirma. Confirmar en Google Maps/Business."},
+    {"tema": "Imágenes de producto", "detalle": "Instagram y el catálogo de WhatsApp no son descargables sin login/app.", "resolucion": "Sólo se obtuvieron 2 fuentes reales: logo (Instagram) y foto de portada del catálogo (WhatsApp). Los productos usan placeholders."},
+    {"tema": "Descripciones", "detalle": "Algunas fichas no se abrieron (hamaca, combo) y hay erratas ('insoportable', 'los protección').", "resolucion": "Se corrigen erratas evidentes de redacción o se deja placeholder."},
+    {"tema": "Talles", "detalle": "Sólo el chaleco muestra XS–4XL; el resto sin dato legible.", "resolucion": "Placeholder marcado en products.json (sizes_is_placeholder)."}
+  ],
+
+  "assets_reales_obtenidos": [
+    {"archivo": "logo", "fuente": "Instagram (foto de perfil)", "resolucion": "100x100", "uso": "header, footer, favicon"},
+    {"archivo": "hero-ruta", "fuente": "Portada del catálogo de WhatsApp", "resolucion": "600x600", "uso": "hero (limitado a ~600 px de ancho)"}
+  ]
+}

@@ -1,0 +1,15 @@
+---
+import { SITE } from '../../data/site';
+import { generalMessage, whatsappHref } from '../../lib/whatsapp';
+import Icon from '../ui/Icon.astro';
+---
+
+<a class="fab" href={whatsappHref(SITE.whatsapp, generalMessage())} target="_blank" rel="noopener" aria-label="Hablame por WhatsApp">
+  <Icon name="whatsapp" size={28} />
+</a>
+
+<style>
+  .fab { position: fixed; right: 1rem; bottom: 1rem; z-index: 30; display: grid; place-items: center; width: 3.5rem; height: 3.5rem; background: var(--wa); color: #06210f; border-radius: 50%; box-shadow: var(--shadow); transition: transform 0.15s; }
+  .fab:hover { transform: scale(1.06); }
+  :global(html:has(dialog[open])) .fab { display: none; }
+</style>

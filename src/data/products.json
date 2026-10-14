@@ -1,0 +1,250 @@
+[
+  {
+    "id": "chaleco-ruta-40",
+    "slug": "chaleco-ruta-40",
+    "name": "Chaleco Ruta 40",
+    "category": "indumentaria",
+    "summary": "Matelasé con bordado de la Ruta 40 y 3 bolsillos.",
+    "description": "Chaleco de matelasé con bordado de la Ruta 40. Trae 3 bolsillos.",
+    "price": 70000,
+    "price_is_placeholder": true,
+    "price_surveyed_at": "2026-10-01",
+    "image": null,
+    "imageAlt": "Chaleco matelasé negro con bordado de la Ruta 40",
+    "features": ["Matelasé", "Bordado Ruta 40", "3 bolsillos"],
+    "specs": [
+      { "label": "Material", "value": "Matelasé" },
+      { "label": "Bolsillos", "value": "3" },
+      { "label": "Talles", "value": "XS a 4XL" }
+    ],
+    "sizes": ["XS", "S", "M", "L", "XL", "2XL", "3XL", "4XL"],
+    "featured": true
+  },
+  {
+    "id": "campera-softshell-4-estaciones",
+    "slug": "campera-softshell-4-estaciones",
+    "name": "Campera softshell 4 estaciones",
+    "category": "indumentaria",
+    "summary": "Impermeable, aislante al frío, con protecciones y abrigo desmontables.",
+    "description": "Trae protección en codos, hombros y espalda, y son desmontables, igual que el abrigo. Es impermeable y aislante al frío.",
+    "price": 240000,
+    "price_before": 250000,
+    "price_is_placeholder": true,
+    "price_surveyed_at": "2026-10-01",
+    "badge": "4 estaciones",
+    "image": null,
+    "imageAlt": "Campera softshell negra con logo naranja bordado en el pecho",
+    "features": ["Impermeable", "Aislante al frío", "Protecciones desmontables", "Abrigo desmontable"],
+    "specs": [
+      { "label": "Material", "value": "Softshell" },
+      { "label": "Protecciones", "value": "Codos, hombros y espalda (desmontables)" },
+      { "label": "Abrigo", "value": "Desmontable" }
+    ],
+    "sizes": ["S", "M", "L", "XL"],
+    "sizes_is_placeholder": true,
+    "featured": true
+  },
+  {
+    "id": "pantalon-4-estaciones-softshell",
+    "slug": "pantalon-4-estaciones-softshell",
+    "name": "Pantalón 4 estaciones de softshell",
+    "category": "indumentaria",
+    "summary": "Con protecciones desmontables en rodillas y cadera.",
+    "description": "Trae protección en rodillas y cadera, y son desmontables.",
+    "price": 180000,
+    "price_before": 195000,
+    "price_is_placeholder": true,
+    "price_surveyed_at": "2026-10-01",
+    "badge": "4 estaciones",
+    "image": null,
+    "imageAlt": "Pantalón softshell negro de corte cargo",
+    "features": ["Softshell", "Protecciones desmontables"],
+    "specs": [
+      { "label": "Material", "value": "Softshell" },
+      { "label": "Protecciones", "value": "Rodillas y cadera (desmontables)" }
+    ],
+    "sizes": ["S", "M", "L", "XL"],
+    "sizes_is_placeholder": true,
+    "featured": true
+  },
+  {
+    "id": "camisa-con-proteccion",
+    "slug": "camisa-con-proteccion",
+    "name": "Camisa con protección",
+    "category": "indumentaria",
+    "summary": "Gabardina con protección en codos, hombros y espalda.",
+    "description": "Camisa de gabardina con protección en codos, hombros y espalda.",
+    "price": 125000,
+    "price_before": 135000,
+    "price_is_placeholder": true,
+    "price_surveyed_at": "2026-10-01",
+    "image": null,
+    "imageAlt": "Camisa de gabardina negra con logo naranja bordado",
+    "features": ["Gabardina", "Protecciones en codos, hombros y espalda"],
+    "specs": [
+      { "label": "Material", "value": "Gabardina" },
+      { "label": "Protecciones", "value": "Codos, hombros y espalda" }
+    ],
+    "sizes": ["S", "M", "L", "XL"],
+    "sizes_is_placeholder": true
+  },
+  {
+    "id": "combo-tarp-bolsa",
+    "slug": "combo-tarp-bolsa",
+    "name": "Combo Tarp + Bolsa de dormir",
+    "category": "camping",
+    "summary": "El techo y la cama del viaje, en un solo pedido.",
+    "description": "Combo en promo: tarp/toldo multiusos más bolsa de dormir Ransser. Los detalles de cada uno están en sus fichas.",
+    "price": 150000,
+    "price_is_placeholder": true,
+    "price_surveyed_at": "2026-10-01",
+    "badge": "Combo",
+    "image": null,
+    "imageAlt": "Tarp gris sobre una carpa azul y bolsas de dormir rojas con logo Ransser",
+    "features": ["Tarp 3x3", "Bolsa de dormir triple capa"],
+    "specs": [
+      { "label": "Incluye", "value": "Tarp/toldo + bolsa de dormir" }
+    ],
+    "sizes": null,
+    "featured": true
+  },
+  {
+    "id": "carpa-2-personas",
+    "slug": "carpa-2-personas",
+    "name": "Carpa 2 personas",
+    "category": "camping",
+    "summary": "Producto 100% argentino, se hace por pedido.",
+    "description": "Medidas de base: 2 x 1,60 m y altura de 1,40 m. Es un producto 100% argentino y se hace por pedido.",
+    "price": 280000,
+    "price_before": 440000,
+    "price_is_placeholder": true,
+    "price_surveyed_at": "2026-10-01",
+    "badge": "Por pedido",
+    "image": null,
+    "imageAlt": "Carpa verde oliva con tarp armado en un jardín",
+    "features": ["100% argentina", "Se hace por pedido"],
+    "specs": [
+      { "label": "Base", "value": "2 x 1,60 m" },
+      { "label": "Altura", "value": "1,40 m" }
+    ],
+    "sizes": null
+  },
+  {
+    "id": "bolsa-de-dormir",
+    "slug": "bolsa-de-dormir",
+    "name": "Bolsa de dormir",
+    "category": "camping",
+    "summary": "Ocupa poco lugar y abriga: sistema triple capa.",
+    "description": "La bolsa de dormir de Ransser es ideal para los viajes: ocupa poco lugar y es muy abrigada, porque cuenta con un sistema triple capa.",
+    "price": 110000,
+    "price_is_placeholder": true,
+    "price_surveyed_at": "2026-10-01",
+    "image": null,
+    "imageAlt": "Bolsa de dormir roja empaquetada con etiqueta Ransser",
+    "features": ["Triple capa", "Muy compacta"],
+    "specs": [
+      { "label": "Packeada", "value": "24 x 17 cm" },
+      { "label": "Peso", "value": "A confirmar" }
+    ],
+    "sizes": null
+  },
+  {
+    "id": "hamaca-paraguaya",
+    "slug": "hamaca-paraguaya",
+    "name": "Hamaca paraguaya",
+    "category": "camping",
+    "summary": "Para colgar en cualquier parada del viaje.",
+    "description": "Hamaca paraguaya Ransser, con su funda. La descripción completa del catálogo está pendiente de cargar.",
+    "description_is_placeholder": true,
+    "price": 42000,
+    "price_is_placeholder": true,
+    "price_surveyed_at": "2026-10-01",
+    "image": null,
+    "imageAlt": "Hamaca paraguaya bordó con funda gris y logo Ransser",
+    "features": ["Con funda"],
+    "specs": [],
+    "sizes": null
+  },
+  {
+    "id": "tarp-toldo",
+    "slug": "tarp-toldo",
+    "name": "Tarp / toldo multiusos",
+    "category": "camping",
+    "summary": "Cubre carpa, cubre moto, te hace techo. 3 x 3 m.",
+    "description": "Es un toldo multiusos: cubre carpa, cubre moto, te hace techo si tenés lluvia o mucho sol, y tiene 100 usos más que podés descubrir vos. Mide 3 x 3 m abierto y 15 x 25 cm enrollado, y aísla de la temperatura, tanto del calor como del frío.",
+    "price": null,
+    "price_is_placeholder": true,
+    "price_surveyed_at": "2026-10-01",
+    "image": null,
+    "imageAlt": "Tarp oscuro armado sobre una carpa azul, con una moto al lado",
+    "features": ["Cubre carpa y moto", "Aislante de temperatura", "Enrollado: 15 x 25 cm"],
+    "specs": [
+      { "label": "Abierto", "value": "3 x 3 m" },
+      { "label": "Enrollado", "value": "15 x 25 cm" }
+    ],
+    "sizes": null
+  },
+  {
+    "id": "outlet-campera-4-estaciones",
+    "slug": "outlet-campera-4-estaciones",
+    "name": "Campera 4 estaciones (outlet)",
+    "category": "outlet",
+    "summary": "Cordura antidesgarro con reflectivos y abrigo desmontable.",
+    "description": "Campera de cordura antidesgarro 4 estaciones, con abrigo desmontable al igual que las protecciones.",
+    "price": 120000,
+    "price_is_placeholder": true,
+    "price_surveyed_at": "2026-10-01",
+    "badge": "Outlet",
+    "image": null,
+    "imageAlt": "Campera negra con reflectivos amarillo flúor y logo rojo en el pecho",
+    "features": ["Cordura antidesgarro", "Reflectivos", "Abrigo desmontable"],
+    "specs": [
+      { "label": "Material", "value": "Cordura antidesgarro" },
+      { "label": "Abrigo", "value": "Desmontable" }
+    ],
+    "sizes": ["S", "M", "L", "XL"],
+    "sizes_is_placeholder": true
+  },
+  {
+    "id": "outlet-campera-4-estaciones-reflectiva",
+    "slug": "outlet-campera-4-estaciones-reflectiva",
+    "name": "Campera 4 estaciones reflectiva (outlet)",
+    "category": "outlet",
+    "summary": "Cordura, gris claro y negra con franja flúor.",
+    "description": "Campera 4 estaciones de cordura, con abrigo desmontable al igual que las protecciones.",
+    "price": 120000,
+    "price_is_placeholder": true,
+    "price_surveyed_at": "2026-10-01",
+    "badge": "Outlet",
+    "image": null,
+    "imageAlt": "Campera gris claro y negra con franja amarillo flúor y logo Ransser",
+    "features": ["Cordura", "Franja reflectiva", "Abrigo desmontable"],
+    "specs": [
+      { "label": "Material", "value": "Cordura" },
+      { "label": "Abrigo", "value": "Desmontable" }
+    ],
+    "sizes": ["S", "M", "L", "XL"],
+    "sizes_is_placeholder": true
+  },
+  {
+    "id": "outlet-campera-mujer-4-estaciones",
+    "slug": "outlet-campera-mujer-4-estaciones",
+    "name": "Campera mujer 4 estaciones (outlet)",
+    "category": "outlet",
+    "summary": "Cordura antidesgarro con detalle violeta.",
+    "description": "Campera de cordura antidesgarro con abrigo desmontable, al igual que las protecciones.",
+    "price": 120000,
+    "price_is_placeholder": true,
+    "price_surveyed_at": "2026-10-01",
+    "badge": "Outlet",
+    "image": null,
+    "imageAlt": "Campera de mujer negra con paneles violeta y logo Ransser en la espalda",
+    "features": ["Cordura antidesgarro", "Abrigo desmontable"],
+    "specs": [
+      { "label": "Material", "value": "Cordura antidesgarro" },
+      { "label": "Abrigo", "value": "Desmontable" }
+    ],
+    "sizes": ["XS", "S", "M", "L"],
+    "sizes_is_placeholder": true
+  }
+]

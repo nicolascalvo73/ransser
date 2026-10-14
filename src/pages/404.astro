@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+import { withBase } from '../lib/url';
+---
+
+<BaseLayout title="Página no encontrada | Ransser" noindex>
+  <section class="container nf">
+    <p class="eyebrow">Error 404</p>
+    <h1>Te perdiste en el camino</h1>
+    <p class="lead">Esa página no existe. Volvé al inicio y seguí viaje.</p>
+    <Button variant="primary" href={withBase('/')}>Volver al inicio</Button>
+  </section>
+</BaseLayout>
+
+<style>
+  .nf { display: grid; justify-items: start; gap: 1rem; padding-block: 5rem; }
+</style>

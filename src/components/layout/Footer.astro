@@ -1,0 +1,51 @@
+---
+import { Image } from 'astro:assets';
+import { getImage } from '../../lib/images';
+import { SITE } from '../../data/site';
+import { generalMessage, whatsappHref } from '../../lib/whatsapp';
+import Icon from '../ui/Icon.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <Image class="footer__logo" src={getImage('logo')} alt="Logo de Ransser" width={56} height={56} />
+      <p><strong>{SITE.fullName}</strong><br />{SITE.tagline}.</p>
+    </div>
+    <ul class="footer__links">
+      <li>
+        <a href={whatsappHref(SITE.whatsapp, generalMessage())} target="_blank" rel="noopener"><Icon name="whatsapp" size={18} /> {SITE.whatsappLabel}</a>
+      </li>
+      <li>
+        <a href={SITE.instagram} target="_blank" rel="noopener"><Icon name="instagram" size={18} /> {SITE.instagramHandle}</a>
+      </li>
+      <li>
+        <a href={SITE.whatsappCatalog} target="_blank" rel="noopener"><Icon name="chat" size={18} /> Catálogo en WhatsApp</a>
+      </li>
+    </ul>
+  </div>
+  <div class="container footer__legal">
+    <p>© {year} {SITE.name}.</p>
+    <p>
+      Propuesta de rediseño de <a href={SITE.mondi} target="_blank" rel="noopener">Mondi Studio</a>. Los precios mostrados son de ejemplo (relevados el 1/10/2026).
+    </p>
+  </div>
+</footer>
+
+<style>
+  .footer { background: var(--surface); border-top: 1px solid var(--line); padding-top: 2.5rem; font-size: var(--fs-sm); color: var(--text-2); }
+  .footer__grid { display: grid; gap: 1.5rem; padding-bottom: 2rem; }
+  .footer__brand { display: flex; align-items: center; gap: 1rem; color: var(--text); }
+  .footer__logo { width: 56px; height: 56px; border-radius: 50%; }
+  .footer__links { display: grid; gap: 0.25rem; }
+  .footer__links a { display: inline-flex; align-items: center; gap: 0.5rem; min-height: var(--tap); text-decoration: none; }
+  .footer__links a:hover, .footer__legal a:hover { color: var(--coral); }
+  .footer__legal { display: grid; gap: 0.25rem; padding-block: 1.25rem; border-top: 1px solid var(--line); }
+  @media (min-width: 768px) {
+    .footer__grid { grid-template-columns: 1fr auto; align-items: center; }
+    .footer__legal { grid-template-columns: auto 1fr; gap: 2rem; }
+    .footer__legal p:last-child { text-align: right; }
+  }
+</style>

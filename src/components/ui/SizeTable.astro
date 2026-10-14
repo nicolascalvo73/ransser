@@ -1,0 +1,50 @@
+---
+import { SIZE_MEASURES } from '../../data/sizes';
+
+interface Props {
+  sizes: string[];
+  placeholder?: boolean;
+}
+const { sizes, placeholder = false } = Astro.props;
+---
+
+<div class="sizes">
+  <h3>Tabla de talles</h3>
+  <div class="sizes__scroll" tabindex="0" role="region" aria-label="Tabla de talles (se desplaza horizontalmente)">
+    <table>
+      <caption class="visually-hidden">Medidas por talle, en centímetros</caption>
+      <thead>
+        <tr>
+          <th scope="col">Medida (cm)</th>
+          {sizes.map((s) => (<th scope="col">{s}</th>))}
+        </tr>
+      </thead>
+      <tbody>
+        {
+          SIZE_MEASURES.map((m) => (
+            <tr>
+              <th scope="row">{m}</th>
+              {sizes.map(() => (<td>—</td>))}
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+  <p class="sizes__note">
+    {placeholder ? 'Talles y medidas de ejemplo: se confirman con la tabla real del producto.' : 'Medidas por confirmar con la tabla real de Ransser.'}
+  </p>
+</div>
+
+<style>
+  .sizes { display: grid; gap: 0.6rem; }
+  h3 { font-size: 1.4rem; }
+  .sizes__scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius-sm); }
+  table { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); }
+  th, td { padding: 0.55rem 0.7rem; text-align: center; white-space: nowrap; border-bottom: 1px solid var(--line); }
+  thead th { background: var(--surface-2); color: var(--coral); font-weight: 700; }
+  tbody th { text-align: left; font-weight: 500; color: var(--text-2); }
+  tbody tr:last-child > * { border-bottom: 0; }
+  td { color: var(--text-2); }
+  .sizes__note { color: var(--text-2); font-size: 0.8rem; }
+</style>

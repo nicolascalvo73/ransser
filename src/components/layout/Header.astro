@@ -1,0 +1,54 @@
+---
+import { Image } from 'astro:assets';
+import { getImage } from '../../lib/images';
+import { withBase } from '../../lib/url';
+import { CATEGORIES } from '../../data/categories';
+import { SITE } from '../../data/site';
+import Icon from '../ui/Icon.astro';
+
+const home = withBase('/');
+const links = [
+  ...CATEGORIES.map((c) => ({ href: `${home}#${c.id}`, label: c.name })),
+  { href: `${home}#envios`, label: 'Envíos' },
+  { href: `${home}#contacto`, label: 'Contacto' },
+];
+---
+
+<header class="header">
+  <div class="container header__bar">
+    <a class="brand" href={home} aria-label={`${SITE.name}, ir al inicio`}>
+      <Image class="brand__logo" src={getImage('logo')} alt="" width={44} height={44} loading="eager" />
+      <span class="brand__name">Ransser</span>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <ul>
+        {links.map((l) => (<li><a href={l.href}>{l.label}</a></li>))}
+      </ul>
+    </nav>
+    <button class="cart-btn" type="button" data-cart-open aria-label="Abrir pedido">
+      <Icon name="cart" size={24} />
+      <span class="cart-btn__count" data-cart-count hidden>0</span>
+    </button>
+  </div>
+</header>
+
+<style>
+  .header { position: sticky; top: 0; z-index: 40; background: rgb(14 15 16 / 92%); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  .header__bar { display: grid; grid-template-columns: 1fr auto; grid-template-areas: 'brand cart' 'nav nav'; align-items: center; column-gap: 1rem; padding-block: 0.5rem; }
+  .brand { grid-area: brand; display: inline-flex; align-items: center; gap: 0.6rem; text-decoration: none; min-height: var(--tap); }
+  .brand__logo { width: 44px; height: 44px; border-radius: 50%; }
+  .brand__name { font: 800 1.9rem/1 var(--font-display); text-transform: uppercase; letter-spacing: 0.04em; }
+  .nav { grid-area: nav; overflow-x: auto; scrollbar-width: none; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav ul { display: flex; gap: 0.25rem; }
+  .nav a { display: inline-flex; align-items: center; min-height: var(--tap); padding-inline: 0.75rem; text-decoration: none; color: var(--text-2); font-weight: 600; white-space: nowrap; border-radius: var(--radius-sm); }
+  .nav a:hover { color: var(--text); background: var(--surface); }
+  .cart-btn { grid-area: cart; position: relative; display: grid; place-items: center; width: var(--tap); height: var(--tap); background: var(--surface); color: var(--text); border: 1px solid var(--line); border-radius: var(--radius-sm); cursor: pointer; }
+  .cart-btn:hover { border-color: var(--coral); }
+  .cart-btn__count { position: absolute; top: -0.35rem; right: -0.35rem; min-width: 1.35rem; height: 1.35rem; padding-inline: 0.25rem; display: grid; place-items: center; background: var(--coral); color: var(--bg); font-size: 0.75rem; font-weight: 800; border-radius: 999px; }
+  .cart-btn__count[hidden] { display: none; }
+  @media (min-width: 768px) {
+    .header__bar { grid-template-columns: auto 1fr auto; grid-template-areas: 'brand nav cart'; }
+    .nav { margin: 0; padding: 0; justify-self: center; overflow: visible; }
+  }
+</style>

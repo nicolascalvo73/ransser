@@ -1,0 +1,80 @@
+---
+import { formatPrice } from '../../lib/format';
+import { productHref } from '../../lib/products';
+import { productMessage, whatsappHref } from '../../lib/whatsapp';
+import { SITE } from '../../data/site';
+import { withBase } from '../../lib/url';
+import type { Product } from '../../types';
+import ProductImage from './ProductImage.astro';
+import Icon from './Icon.astro';
+
+interface Props {
+  product: Product;
+}
+const { product } = Astro.props;
+const hasSizes = product.sizes !== null;
+const href = withBase(productHref(product));
+---
+
+<article class="card">
+  <a class="card__media" href={href} tabindex="-1" aria-hidden="true">
+    <ProductImage product={product} />
+    {product.badge && <span class:list={['card__badge', { 'card__badge--fluo': product.category === 'outlet' }]}>{product.badge}</span>}
+  </a>
+  <div class="card__body">
+    <h3 class="card__name"><a href={href}>{product.name}</a></h3>
+    <p class="card__summary">{product.summary}</p>
+    <p class="card__price">
+      {
+        product.price !== null ? (
+          <>
+            <strong>{formatPrice(product.price)}</strong>
+            {product.price_before && <s aria-label={`Antes ${formatPrice(product.price_before)}`}>{formatPrice(product.price_before)}</s>}
+          </>
+        ) : (
+          <strong class="card__ask">Consultar precio</strong>
+        )
+      }
+    </p>
+    <div class="card__actions">
+      {
+        product.price === null ? (
+          <a class="btn btn--wa btn--block" href={whatsappHref(SITE.whatsapp, productMessage(product))} target="_blank" rel="noopener">
+            <Icon name="whatsapp" size={18} /> Consultar
+          </a>
+        ) : hasSizes ? (
+          <a class="btn btn--ghost btn--block" href={href}>Elegir talle <Icon name="arrow" size={18} /></a>
+        ) : (
+          <button
+            class="btn btn--primary btn--block"
+            type="button"
+            data-add-to-cart
+            data-id={product.id}
+            data-name={product.name}
+            data-price={product.price}
+          >
+            <Icon name="plus" size={18} /> Sumar al pedido
+          </button>
+        )
+      }
+    </div>
+  </div>
+</article>
+
+<style>
+  .card { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; transition: border-color 0.2s, transform 0.2s; }
+  .card:hover { border-color: #444a50; transform: translateY(-2px); }
+  .card__media { position: relative; display: block; text-decoration: none; }
+  .card__badge { position: absolute; top: 0.7rem; left: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 999px; background: var(--coral); color: var(--bg); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+  .card__badge--fluo { background: var(--fluo); }
+  .card__body { display: flex; flex-direction: column; gap: 0.5rem; padding: 1rem; flex: 1; }
+  .card__name { font-size: 1.55rem; }
+  .card__name a { text-decoration: none; }
+  .card__name a:hover { color: var(--coral); }
+  .card__summary { color: var(--text-2); font-size: var(--fs-sm); flex: 1; }
+  .card__price { display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap; }
+  .card__price strong { font-size: 1.3rem; color: var(--text); }
+  .card__price s { color: var(--text-2); font-size: var(--fs-sm); }
+  .card__ask { color: var(--sand) !important; font-size: 1.05rem !important; }
+  .card__actions { margin-top: 0.25rem; }
+</style>

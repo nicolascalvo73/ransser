@@ -1,0 +1,28 @@
+---
+import { SITE } from '../../data/site';
+import { generalMessage, whatsappHref } from '../../lib/whatsapp';
+import Button from '../ui/Button.astro';
+import Icon from '../ui/Icon.astro';
+---
+
+<section class="section contact" id="contacto" aria-labelledby="contacto-title">
+  <div class="container contact__box">
+    <div>
+      <p class="eyebrow">Contacto</p>
+      <h2 id="contacto-title">Hablame al privado</h2>
+      <p class="lead">Consultas por WhatsApp o por Instagram.</p>
+    </div>
+    <div class="contact__actions">
+      <Button variant="wa" href={whatsappHref(SITE.whatsapp, generalMessage())} target="_blank" rel="noopener"><Icon name="whatsapp" size={18} /> {SITE.whatsappLabel}</Button>
+      <Button variant="ghost" href={SITE.instagram} target="_blank" rel="noopener"><Icon name="instagram" size={18} /> {SITE.instagramHandle}</Button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact { border-top: 1px solid var(--line); }
+  .contact__box { display: grid; gap: 1.5rem; padding: clamp(1.5rem, 5vw, 3rem); background: linear-gradient(135deg, var(--surface), var(--surface-2)); border: 1px solid var(--line); border-radius: var(--radius); }
+  h2 { margin-block: 0.4rem 0.75rem; }
+  .contact__actions { display: grid; gap: 0.75rem; align-content: center; }
+  @media (min-width: 768px) { .contact__box { grid-template-columns: 1.4fr 1fr; align-items: center; } }
+</style>

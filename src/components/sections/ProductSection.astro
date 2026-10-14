@@ -1,0 +1,34 @@
+---
+import type { Category, Product } from '../../types';
+import ProductCard from '../ui/ProductCard.astro';
+
+interface Props {
+  category: Category;
+  products: Product[];
+}
+const { category, products } = Astro.props;
+---
+
+<section class="section psec" id={category.id} aria-labelledby={`${category.id}-title`} style={`--accent:${category.accent}`}>
+  <div class="container">
+    <header class="psec__head">
+      <h2 id={`${category.id}-title`}>{category.name}</h2>
+      <p>{category.tagline}</p>
+    </header>
+    <ul class="grid">
+      {products.map((p) => (<li><ProductCard product={p} /></li>))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .psec { border-top: 1px solid var(--line); }
+  .psec__head { display: grid; gap: 0.5rem; margin-bottom: 1.5rem; }
+  .psec__head h2 { padding-left: 0.9rem; border-left: 6px solid var(--accent); }
+  .psec__head p { color: var(--text-2); }
+  .grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+  .grid > li { display: flex; }
+  .grid > li > :global(.card) { flex: 1; }
+  @media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+</style>

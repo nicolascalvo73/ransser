@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/sections/Hero.astro';
+import Categories from '../components/sections/Categories.astro';
+import ComboBanner from '../components/sections/ComboBanner.astro';
+import ProductSection from '../components/sections/ProductSection.astro';
+import Shipping from '../components/sections/Shipping.astro';
+import AskAbout from '../components/sections/AskAbout.astro';
+import Contact from '../components/sections/Contact.astro';
+import { CATEGORIES } from '../data/categories';
+import { productsByCategory } from '../lib/products';
+---
+
+<BaseLayout>
+  <Hero />
+  <Categories />
+  <ComboBanner />
+  {CATEGORIES.map((c) => (<ProductSection category={c} products={productsByCategory(c.id)} />))}
+  <Shipping />
+  <AskAbout />
+  <Contact />
+</BaseLayout>

@@ -1,0 +1,49 @@
+---
+import { CATEGORIES } from '../../data/categories';
+import { productsByCategory } from '../../lib/products';
+import { withBase } from '../../lib/url';
+import Icon from '../ui/Icon.astro';
+---
+
+<section class="section" aria-labelledby="cats-title">
+  <div class="container">
+    <p class="eyebrow">Elegí por dónde arrancar</p>
+    <h2 id="cats-title">Categorías</h2>
+    <ul class="cats">
+      {
+        CATEGORIES.map((c) => {
+          const n = productsByCategory(c.id).length;
+          return (
+            <li>
+              <a class="cat" href={`${withBase('/')}#${c.id}`} style={`--accent:${c.accent}`}>
+                <Icon name={c.icon} size={36} />
+                <span class="cat__text">
+                  <strong>{c.name}</strong>
+                  <span>{c.tagline}</span>
+                </span>
+                <span class="cat__count">{n} {n === 1 ? 'producto' : 'productos'}</span>
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  h2 { margin-top: 0.4rem; }
+  .cats { display: grid; gap: 0.75rem; margin-top: 1.5rem; }
+  .cat { position: relative; display: grid; grid-template-columns: auto 1fr; gap: 0.5rem 1rem; align-items: center; padding: 1.25rem; background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: var(--radius); text-decoration: none; transition: background-color 0.2s, transform 0.2s; }
+  .cat:hover { background: var(--surface-2); transform: translateY(-2px); }
+  .cat :global(svg) { color: var(--accent); }
+  .cat__text { display: grid; gap: 0.15rem; }
+  .cat__text strong { font: 800 1.9rem/1 var(--font-display); text-transform: uppercase; }
+  .cat__text span { color: var(--text-2); font-size: var(--fs-sm); }
+  .cat__count { grid-column: 2; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+  @media (min-width: 768px) {
+    .cats { grid-template-columns: repeat(3, 1fr); }
+    .cat { grid-template-columns: 1fr; align-content: start; }
+    .cat__count { grid-column: 1; }
+  }
+</style>

@@ -1,0 +1,53 @@
+---
+import { Image } from 'astro:assets';
+import { getImage } from '../../lib/images';
+import { withBase } from '../../lib/url';
+import { SITE } from '../../data/site';
+import { formatCount } from '../../lib/format';
+import { generalMessage, whatsappHref } from '../../lib/whatsapp';
+import Button from '../ui/Button.astro';
+import Icon from '../ui/Icon.astro';
+---
+
+<section class="hero">
+  <div class="container hero__grid">
+    <div class="hero__copy">
+      <p class="eyebrow">Indumentaria y accesorios para moteros</p>
+      <h1>Viajás en moto? <span>Vestite y acampá para el camino.</span></h1>
+      <p class="lead">Camperas con protecciones, pantalón, chaleco y todo el camping que entra en la valija. Hecho para la ruta de tierra, no para la vidriera.</p>
+      <div class="hero__cta">
+        <Button variant="primary" href={`${withBase('/')}#indumentaria`}>Ver productos <Icon name="arrow" size={18} /></Button>
+        <Button variant="wa" href={whatsappHref(SITE.whatsapp, generalMessage())} target="_blank" rel="noopener"><Icon name="whatsapp" size={18} /> Hablame por WhatsApp</Button>
+      </div>
+    </div>
+    <figure class="hero__photo">
+      <Image src={getImage('hero-ruta')} alt="El dueño de Ransser con campera y pantalón negros, parado junto a su moto en un camino de tierra" width={600} height={600} loading="eager" fetchpriority="high" sizes="(min-width: 900px) 30rem, 100vw" />
+      <figcaption>Foto real del catálogo de Ransser</figcaption>
+    </figure>
+  </div>
+  <ul class="container trust" aria-label="Datos de la marca">
+    <li><Icon name="instagram" size={18} /> {formatCount(SITE.instagramFollowers)} seguidores en Instagram</li>
+    <li><Icon name="truck" size={18} /> Envíos a todo el país</li>
+    <li><Icon name="chat" size={18} /> Consultas por WhatsApp</li>
+  </ul>
+</section>
+
+<style>
+  .hero { padding-top: 1.5rem; background: radial-gradient(60rem 30rem at 85% 0%, rgb(228 90 82 / 12%), transparent 60%); }
+  .hero__grid { display: grid; gap: 1.75rem; align-items: center; }
+  .hero__photo { margin: 0; order: -1; }
+  .hero__photo :global(img) { width: 100%; max-width: 30rem; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: var(--radius); border: 1px solid var(--line); margin-inline: auto; }
+  .hero__photo figcaption { margin-top: 0.5rem; text-align: center; color: var(--text-2); font-size: 0.75rem; }
+  .hero__copy { display: grid; gap: 1.1rem; justify-items: start; }
+  h1 span { display: block; color: var(--coral); }
+  .hero__cta { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .trust { display: grid; gap: 0.25rem 1.5rem; margin-top: 2rem; padding-block: 1rem; border-top: 1px solid var(--line); color: var(--text-2); font-size: var(--fs-sm); }
+  .trust li { display: flex; align-items: center; gap: 0.5rem; min-height: 2rem; }
+  .trust :global(svg) { color: var(--coral); }
+  @media (min-width: 900px) {
+    .hero { padding-top: 3rem; }
+    .hero__grid { grid-template-columns: 1.1fr 0.9fr; gap: 3rem; }
+    .hero__photo { order: 0; }
+    .trust { grid-auto-flow: column; justify-content: start; }
+  }
+</style>

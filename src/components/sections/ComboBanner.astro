@@ -1,0 +1,36 @@
+---
+import { formatPrice } from '../../lib/format';
+import { getProduct, productHref } from '../../lib/products';
+import { withBase } from '../../lib/url';
+import Button from '../ui/Button.astro';
+import Icon from '../ui/Icon.astro';
+
+const combo = getProduct('combo-tarp-bolsa');
+---
+
+{
+  combo && combo.price !== null && (
+    <section class="combo" aria-labelledby="combo-title">
+      <div class="container combo__box">
+        <div class="combo__text">
+          <p class="eyebrow">Combo en promo</p>
+          <h2 id="combo-title">Techo y cama para el viaje</h2>
+          <p class="lead">Tarp 3x3 más bolsa de dormir triple capa, en un solo pedido.</p>
+        </div>
+        <div class="combo__buy">
+          <p class="combo__price">{formatPrice(combo.price)}</p>
+          <Button variant="primary" href={withBase(productHref(combo))}>Ver el combo <Icon name="arrow" size={18} /></Button>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .combo { padding-block: 0 clamp(2rem, 6vw, 3.5rem); }
+  .combo__box { display: grid; gap: 1.25rem; padding: clamp(1.5rem, 5vw, 2.5rem); background: linear-gradient(120deg, rgb(94 110 59 / 35%), var(--surface) 70%); border: 1px solid var(--olive); border-radius: var(--radius); }
+  h2 { margin-block: 0.4rem 0.6rem; }
+  .combo__buy { display: grid; gap: 0.75rem; align-content: center; justify-items: start; }
+  .combo__price { font: 800 clamp(2.5rem, 8vw, 3.5rem)/1 var(--font-display); color: var(--olive-light); }
+  @media (min-width: 768px) { .combo__box { grid-template-columns: 1.5fr 1fr; align-items: center; } }
+</style>

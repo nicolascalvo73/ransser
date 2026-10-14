@@ -1,0 +1,92 @@
+---
+import { MAX_QTY } from '../../lib/cart';
+import { withBase } from '../../lib/url';
+import Icon from '../ui/Icon.astro';
+---
+
+<p class="visually-hidden" role="status" aria-live="polite" data-cart-live></p>
+
+<dialog id="cart-drawer" class="drawer" aria-labelledby="cart-title" data-max-qty={MAX_QTY}>
+  <div class="drawer__panel">
+    <header class="drawer__head">
+      <h2 id="cart-title">Tu pedido</h2>
+      <button class="drawer__close" type="button" data-cart-close aria-label="Cerrar pedido"><Icon name="close" size={24} /></button>
+    </header>
+
+    <div class="drawer__body">
+      <div class="drawer__empty" data-cart-empty>
+        <Icon name="cart" size={44} />
+        <p><strong>Todavía no sumaste nada.</strong></p>
+        <p>Elegí lo que necesites para el viaje y lo armamos acá.</p>
+        <a class="btn btn--primary" href={`${withBase('/')}#indumentaria`} data-cart-close>Ver productos</a>
+      </div>
+      <ul class="drawer__list" data-cart-list></ul>
+    </div>
+
+    <footer class="drawer__foot" data-cart-foot hidden>
+      <div class="drawer__total"><span>Total estimado</span><strong data-cart-total></strong></div>
+      <p class="drawer__note">Precios de ejemplo. Stock, talles y costo de envío se confirman antes de pagar.</p>
+      <a class="btn btn--primary btn--block" href={withBase('/checkout')}>Confirmar pedido <Icon name="arrow" size={18} /></a>
+      <button class="drawer__clear" type="button" data-cart-clear>Vaciar pedido</button>
+    </footer>
+  </div>
+</dialog>
+
+<template id="cart-row-template">
+  <li class="row">
+    <div class="row__info">
+      <p class="row__name"></p>
+      <p class="row__variant"></p>
+      <div class="row__qty">
+        <button type="button" data-qty-dec aria-label="Restar una unidad"><Icon name="minus" size={16} /></button>
+        <output class="row__n"></output>
+        <button type="button" data-qty-inc aria-label="Sumar una unidad"><Icon name="plus" size={16} /></button>
+      </div>
+    </div>
+    <div class="row__side">
+      <p class="row__price"></p>
+      <button class="row__remove" type="button" data-remove aria-label="Quitar del pedido"><Icon name="trash" size={18} /></button>
+    </div>
+  </li>
+</template>
+
+<style is:global>
+  html:has(dialog.drawer[open]) { overflow: hidden; }
+
+  dialog.drawer { margin: 0 0 0 auto; padding: 0; border: 0; width: min(26rem, 100vw); max-width: 100vw; height: 100dvh; max-height: 100dvh; background: var(--surface); color: var(--text); box-shadow: -12px 0 40px rgb(0 0 0 / 60%); transform: translateX(100%); transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1), overlay 0.3s allow-discrete, display 0.3s allow-discrete; }
+  dialog.drawer[open] { transform: translateX(0); }
+  @starting-style { dialog.drawer[open] { transform: translateX(100%); } }
+  dialog.drawer::backdrop { background: rgb(0 0 0 / 0%); transition: background-color 0.3s ease, overlay 0.3s allow-discrete, display 0.3s allow-discrete; }
+  dialog.drawer[open]::backdrop { background: rgb(0 0 0 / 65%); }
+  @starting-style { dialog.drawer[open]::backdrop { background: rgb(0 0 0 / 0%); } }
+
+  .drawer__panel { display: flex; flex-direction: column; height: 100%; }
+  .drawer__head { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 0.75rem 0.75rem 1.25rem; border-bottom: 1px solid var(--line); }
+  .drawer__head h2 { font-size: 2rem; }
+  .drawer__close { display: grid; place-items: center; width: var(--tap); height: var(--tap); background: none; border: 0; color: var(--text); cursor: pointer; border-radius: var(--radius-sm); }
+  .drawer__close:hover { background: var(--surface-2); }
+  .drawer__body { flex: 1; overflow-y: auto; padding: 0.5rem 1.25rem; }
+  .drawer__empty { display: grid; justify-items: center; gap: 0.75rem; text-align: center; padding-block: 3rem; color: var(--text-2); }
+  .drawer__empty[hidden] { display: none; }
+  .drawer__list { display: grid; }
+
+  .row { display: flex; justify-content: space-between; gap: 1rem; padding-block: 1rem; border-bottom: 1px solid var(--line); }
+  .row__name { font-weight: 600; line-height: 1.3; }
+  .row__variant { color: var(--text-2); font-size: var(--fs-sm); min-height: 1.2em; }
+  .row__qty { display: inline-flex; align-items: center; margin-top: 0.5rem; border: 1px solid var(--line); border-radius: var(--radius-sm); }
+  .row__qty button { display: grid; place-items: center; width: var(--tap); height: 2.25rem; background: none; border: 0; color: var(--text); cursor: pointer; }
+  .row__qty button:hover { background: var(--surface-2); }
+  .row__n { min-width: 2rem; text-align: center; font-weight: 700; }
+  .row__side { display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between; }
+  .row__price { font-weight: 700; color: var(--coral); }
+  .row__remove { display: grid; place-items: center; width: var(--tap); height: 2.25rem; background: none; border: 0; color: var(--text-2); cursor: pointer; }
+  .row__remove:hover { color: var(--danger); }
+
+  .drawer__foot { display: grid; gap: 0.75rem; padding: 1rem 1.25rem 1.25rem; border-top: 1px solid var(--line); background: var(--surface-2); }
+  .drawer__foot[hidden] { display: none; }
+  .drawer__total { display: flex; justify-content: space-between; align-items: baseline; }
+  .drawer__total strong { font-size: 1.6rem; }
+  .drawer__note { color: var(--text-2); font-size: 0.8rem; }
+  .drawer__clear { justify-self: center; min-height: var(--tap); background: none; border: 0; color: var(--text-2); text-decoration: underline; cursor: pointer; }
+  .drawer__clear:hover { color: var(--text); }
+</style>
