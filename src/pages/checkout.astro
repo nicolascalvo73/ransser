@@ -126,9 +126,9 @@ const home = withBase('/');
   .srow__qty button:hover { background: var(--surface-2); }
   .srow__n { min-width: 2rem; text-align: center; font-weight: 700; }
   .srow__side { display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between; }
-  .srow__price { font-weight: 700; color: var(--coral); }
+  .srow__price { font-weight: 700; color: var(--accent); }
   .srow__remove { display: grid; place-items: center; width: var(--tap); height: 2.25rem; background: none; border: 0; color: var(--text-2); cursor: pointer; }
-  .srow__remove:hover { color: var(--danger); }
+  .srow__remove:hover { color: var(--accent); }
   .stotal { display: flex; justify-content: space-between; align-items: baseline; font-size: var(--fs-lg); }
   .stotal strong { font: 800 2.2rem/1 var(--font-display); color: var(--text); }
   .linkbtn { justify-self: start; min-height: var(--tap); background: none; border: 0; color: var(--text-2); text-decoration: underline; cursor: pointer; }
@@ -139,9 +139,9 @@ const home = withBase('/');
   .field label { font-size: var(--fs-sm); font-weight: 600; }
   .field input, .field select, .field textarea { width: 100%; min-height: var(--tap); padding: 0.6rem 0.8rem; background: var(--bg); color: var(--text); border: 1px solid var(--line); border-radius: var(--radius-sm); font: inherit; }
   .field textarea { resize: vertical; }
-  .field input:hover, .field select:hover, .field textarea:hover { border-color: #444a50; }
-  .field [aria-invalid] { border-color: var(--danger); }
-  .field .err { color: var(--danger); font-size: var(--fs-sm); }
+  .field input:hover, .field select:hover, .field textarea:hover { border-color: var(--line-2); }
+  .field [aria-invalid] { border-color: var(--accent); }
+  .field .err { color: var(--accent); font-size: var(--fs-sm); }
   .field .err[hidden] { display: none; }
   .pay { display: grid; gap: 0.75rem; margin-top: 0.5rem; }
   .pay .btn[disabled] { opacity: 0.6; cursor: progress; }
