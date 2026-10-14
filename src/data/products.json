@@ -9,7 +9,7 @@
     "price": 70000,
     "price_is_placeholder": true,
     "price_surveyed_at": "2026-10-01",
-    "image": null,
+    "image": "chaleco-ruta-40",
     "imageAlt": "Chaleco matelasé negro con bordado de la Ruta 40",
     "features": [
       "Matelasé",
@@ -54,7 +54,7 @@
     "price_is_placeholder": true,
     "price_surveyed_at": "2026-10-01",
     "badge": "4 estaciones",
-    "image": null,
+    "image": "campera-softshell-4-estaciones",
     "imageAlt": "Campera softshell negra con logo naranja bordado en el pecho",
     "features": [
       "Impermeable",
@@ -97,7 +97,7 @@
     "price_is_placeholder": true,
     "price_surveyed_at": "2026-10-01",
     "badge": "4 estaciones",
-    "image": null,
+    "image": "pantalon-4-estaciones-softshell",
     "imageAlt": "Pantalón softshell negro de corte cargo",
     "features": [
       "Softshell",
@@ -133,7 +133,7 @@
     "price_before": 135000,
     "price_is_placeholder": true,
     "price_surveyed_at": "2026-10-01",
-    "image": null,
+    "image": "camisa-con-proteccion",
     "imageAlt": "Camisa de gabardina negra con logo naranja bordado",
     "features": [
       "Gabardina",
@@ -168,7 +168,7 @@
     "price_is_placeholder": true,
     "price_surveyed_at": "2026-10-01",
     "badge": "Combo",
-    "image": null,
+    "image": "combo-tarp-bolsa",
     "imageAlt": "Tarp gris sobre una carpa azul y bolsas de dormir rojas con logo Ransser",
     "features": [
       "Tarp 3x3",
@@ -195,7 +195,7 @@
     "price_is_placeholder": true,
     "price_surveyed_at": "2026-10-01",
     "badge": "Por pedido",
-    "image": null,
+    "image": "carpa-2-personas",
     "imageAlt": "Carpa verde oliva con tarp armado en un jardín",
     "features": [
       "100% argentina",
@@ -223,7 +223,7 @@
     "price": 110000,
     "price_is_placeholder": true,
     "price_surveyed_at": "2026-10-01",
-    "image": null,
+    "image": "bolsa-de-dormir",
     "imageAlt": "Bolsa de dormir roja empaquetada con etiqueta Ransser",
     "features": [
       "Triple capa",
@@ -254,7 +254,7 @@
     "price": 42000,
     "price_is_placeholder": true,
     "price_surveyed_at": "2026-10-01",
-    "image": null,
+    "image": "hamaca-paraguaya",
     "imageAlt": "Hamaca paraguaya bordó con funda gris y logo Ransser",
     "features": [
       "Liviana",
@@ -288,7 +288,7 @@
     "price": 38000,
     "price_is_placeholder": true,
     "price_surveyed_at": "2026-10-01",
-    "image": null,
+    "image": "tarp-toldo",
     "imageAlt": "Tarp oscuro armado sobre una carpa azul, con una moto al lado",
     "features": [
       "Cubre carpa y moto",
@@ -321,7 +321,7 @@
     "price_is_placeholder": true,
     "price_surveyed_at": "2026-10-01",
     "badge": "Outlet",
-    "image": null,
+    "image": "outlet-campera-4-estaciones",
     "imageAlt": "Campera negra con reflectivos amarillo flúor y logo rojo en el pecho",
     "features": [
       "Cordura antidesgarro",
@@ -357,7 +357,7 @@
     "price_is_placeholder": true,
     "price_surveyed_at": "2026-10-01",
     "badge": "Outlet",
-    "image": null,
+    "image": "outlet-campera-4-estaciones-reflectiva",
     "imageAlt": "Campera gris claro y negra con franja amarillo flúor y logo Ransser",
     "features": [
       "Cordura",
@@ -393,7 +393,7 @@
     "price_is_placeholder": true,
     "price_surveyed_at": "2026-10-01",
     "badge": "Outlet",
-    "image": null,
+    "image": "outlet-campera-mujer-4-estaciones",
     "imageAlt": "Campera de mujer negra con paneles violeta y logo Ransser en la espalda",
     "features": [
       "Cordura antidesgarro",

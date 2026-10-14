@@ -245,6 +245,7 @@
 
   "assets_reales_obtenidos": [
     {"archivo": "logo", "fuente": "Instagram (foto de perfil)", "resolucion": "100x100", "uso": "header, footer, favicon"},
+    {"archivo": "fotos de producto (12)", "fuente": "Capturas de las fichas del catálogo de WhatsApp en ./img/, recortadas a 4:5 con scripts/crop-products.mjs", "resolucion": "557x696 a 720x900 (hamaca: 242x302, baja resolución)", "uso": "cards y fichas; se tapó la flecha de la app y el 'Peso: 900 kg' impreso en la foto de la bolsa"},
     {"archivo": "hero-ruta", "fuente": "Portada del catálogo de WhatsApp", "resolucion": "600x600", "uso": "hero (limitado a ~600 px de ancho)"}
   ]
 }
