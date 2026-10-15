@@ -8,8 +8,6 @@ export interface Category {
   id: CategoryId;
   name: string;
   tagline: string;
-  /** Color de apoyo de la categoría (token CSS), nunca color de marca. */
-  accent: string;
   icon: IconName;
 }
 

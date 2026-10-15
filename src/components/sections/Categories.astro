@@ -2,48 +2,48 @@
 import { CATEGORIES } from '../../data/categories';
 import { productsByCategory } from '../../lib/products';
 import { withBase } from '../../lib/url';
-import Icon from '../ui/Icon.astro';
+import SplitTitle from '../ui/SplitTitle.astro';
 ---
 
-<section class="section" aria-labelledby="cats-title">
-  <div class="container">
-    <p class="eyebrow">Elegí por dónde arrancar</p>
-    <h2 id="cats-title">Categorías</h2>
-    <ul class="cats">
-      {
-        CATEGORIES.map((c) => {
-          const n = productsByCategory(c.id).length;
-          return (
-            <li>
-              <a class="cat" href={`${withBase('/')}#${c.id}`} style={`--accent:${c.accent}`}>
-                <Icon name={c.icon} size={36} />
-                <span class="cat__text">
-                  <strong>{c.name}</strong>
-                  <span>{c.tagline}</span>
-                </span>
-                <span class="cat__count">{n} {n === 1 ? 'producto' : 'productos'}</span>
-              </a>
-            </li>
-          );
-        })
-      }
-    </ul>
-  </div>
+<section class="container cats" id="categorias" aria-labelledby="cats-title">
+  <h2 id="cats-title" data-title><SplitTitle text="Elegí por dónde arrancar" accent={1} /></h2>
+  <ul class="rows">
+    {
+      CATEGORIES.map((c, i) => {
+        const n = productsByCategory(c.id).length;
+        return (
+          <li>
+            <a class="row" href={`${withBase('/')}#${c.id}`} data-row>
+              <span class="row__fill" data-fill aria-hidden="true" />
+              <span class="row__n">{String(i + 1).padStart(2, '0')}</span>
+              <span class="row__text">
+                <span class="row__name">{c.name}</span>
+                <span class="row__tag">{c.tagline}</span>
+              </span>
+              <span class="row__count">{n} {n === 1 ? 'producto' : 'productos'} <span class="row__arrow" data-arrow aria-hidden="true">↗</span></span>
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
 </section>
 
 <style>
-  h2 { margin-top: 0.4rem; }
-  .cats { display: grid; gap: 0.75rem; margin-top: 1.5rem; }
-  .cat { position: relative; display: grid; grid-template-columns: auto 1fr; gap: 0.5rem 1rem; align-items: center; padding: 1.25rem; background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: var(--radius); text-decoration: none; transition: background-color 0.2s, transform 0.2s; }
-  .cat:hover { background: var(--surface-2); transform: translateY(-2px); }
-  .cat :global(svg) { color: var(--accent); }
-  .cat__text { display: grid; gap: 0.15rem; }
-  .cat__text strong { font: 800 1.9rem/1 var(--font-display); text-transform: uppercase; }
-  .cat__text span { color: var(--text-2); font-size: var(--fs-sm); }
-  .cat__count { grid-column: 2; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
-  @media (min-width: 768px) {
-    .cats { grid-template-columns: repeat(3, 1fr); }
-    .cat { grid-template-columns: 1fr; align-content: start; }
-    .cat__count { grid-column: 1; }
-  }
+  .cats { padding-block: 7rem 2.5rem; }
+  h2 { font-size: clamp(2.75rem, 7vw, 7rem); margin-bottom: 3.5rem; }
+  .rows { border-bottom: 1px solid var(--line); }
+  .rows li { border-top: 1px solid var(--line); }
+  .row { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 2.5rem; padding: 2.5rem 1.25rem; overflow: hidden; text-decoration: none; color: var(--text); }
+  .row__fill { position: absolute; inset: 0; background: var(--accent); transform: scaleY(0); transform-origin: 50% 100%; }
+  /* Sin JS el relleno sube con CSS; con motion.ts lo controla GSAP (data-fill + clase .is-js). */
+  :global(html:not(.has-motion)) .row:hover, :global(html:not(.has-motion)) .row:focus-visible { color: var(--on-accent); }
+  :global(html:not(.has-motion)) .row:hover .row__fill, :global(html:not(.has-motion)) .row:focus-visible .row__fill { transform: scaleY(1); transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
+  .row > * { position: relative; }
+  .row__n { min-width: 3rem; font: 500 0.875rem var(--font-mono); letter-spacing: 0.1em; }
+  .row__text { flex: 1 1 320px; display: flex; flex-direction: column; gap: 0.4rem; }
+  .row__name { font: 900 clamp(2.5rem, 6vw, 5.5rem)/0.95 var(--font-display); text-transform: uppercase; }
+  .row__tag { max-width: 32rem; opacity: 0.8; }
+  .row__count { display: flex; align-items: center; gap: 1.25rem; font: 500 0.875rem var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; }
+  .row__arrow { display: inline-block; font-size: 2rem; line-height: 1; }
 </style>

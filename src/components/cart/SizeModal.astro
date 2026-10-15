@@ -1,0 +1,39 @@
+---
+---
+
+<dialog id="size-modal" class="modal" aria-labelledby="talle-t">
+  <div class="modal__panel" data-modal>
+    <div class="modal__head">
+      <p class="eyebrow">Elegir talle</p>
+      <h2 id="talle-t" data-modal-name></h2>
+      <span class="modal__price" data-modal-price></span>
+    </div>
+    <div class="modal__sizes" role="group" aria-label="Talles" data-modal-sizes></div>
+    <p class="modal__error" data-modal-error role="alert" hidden>Elegí un talle para sumarlo al pedido.</p>
+    <p class="modal__note" data-modal-note>Confirmamos stock, talle y costo de envío antes del pago.</p>
+    <a class="modal__link" data-modal-link href="#">Ver ficha y tabla de talles</a>
+    <div class="modal__actions">
+      <button class="btn btn--primary" type="button" data-modal-confirm disabled>Sumar al pedido</button>
+      <button class="btn" type="button" data-modal-close>Cancelar</button>
+    </div>
+  </div>
+</dialog>
+
+<style is:global>
+  dialog.modal { margin: auto; padding: 0; width: min(520px, calc(100% - 2rem)); max-width: none; border: 1px solid var(--line); background: var(--surface-2); color: var(--text); }
+  dialog.modal::backdrop { background: rgb(14 15 16 / calc(0.82 * var(--bo, 1))); }
+  .modal__panel { display: flex; flex-direction: column; gap: 1.5rem; padding: 2rem; }
+  .modal__head { display: flex; flex-direction: column; gap: 0.5rem; }
+  .modal__head h2 { font-size: 2.75rem; line-height: 0.95; }
+  .modal__price { font: 900 1.9rem/1 var(--font-display); }
+  .modal__sizes { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .modal__sizes button { min-width: 3.5rem; min-height: 3rem; padding: 0 1rem; cursor: pointer; font: 600 1rem var(--font-body); border: 1.5px solid var(--line-2); background: transparent; color: var(--text); transition: background-color 0.2s, border-color 0.2s, color 0.2s; }
+  .modal__sizes button:hover { border-color: var(--text); }
+  .modal__sizes button[aria-pressed='true'] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  .modal__error { color: var(--accent); font-size: 0.9rem; font-weight: 600; }
+  .modal__error::before { content: 'Error: '; }
+  .modal__error[hidden] { display: none; }
+  .modal__note { color: var(--text-2); font-size: 0.875rem; }
+  .modal__link { align-self: flex-start; display: inline-flex; align-items: center; min-height: var(--tap); color: var(--accent); }
+  .modal__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+</style>

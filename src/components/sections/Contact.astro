@@ -1,28 +1,28 @@
 ---
 import { SITE } from '../../data/site';
 import { generalMessage, whatsappHref } from '../../lib/whatsapp';
-import Button from '../ui/Button.astro';
-import Icon from '../ui/Icon.astro';
 ---
 
-<section class="section contact" id="contacto" aria-labelledby="contacto-title">
-  <div class="container contact__box">
-    <div>
+<section class="container contact" id="contacto" aria-labelledby="contacto-title">
+  <div class="box" data-rv>
+    <div class="box__text">
       <p class="eyebrow">Contacto</p>
       <h2 id="contacto-title">Hablame al privado</h2>
-      <p class="lead">Consultas por WhatsApp o por Instagram.</p>
     </div>
-    <div class="contact__actions">
-      <Button variant="wa" href={whatsappHref(SITE.whatsapp, generalMessage())} target="_blank" rel="noopener"><Icon name="whatsapp" size={18} /> {SITE.whatsappLabel}</Button>
-      <Button variant="ghost" href={SITE.instagram} target="_blank" rel="noopener"><Icon name="instagram" size={18} /> {SITE.instagramHandle}</Button>
+    <div class="box__links">
+      <a class="phone" href={whatsappHref(SITE.whatsapp, generalMessage())} target="_blank" rel="noopener">{SITE.whatsappLabel}</a>
+      <a class="ig" href={SITE.instagram} target="_blank" rel="noopener">{SITE.instagramHandle}</a>
     </div>
   </div>
 </section>
 
 <style>
-  .contact { border-top: 1px solid var(--line); }
-  .contact__box { display: grid; gap: 1.5rem; padding: clamp(1.5rem, 5vw, 3rem); background: linear-gradient(135deg, var(--surface), var(--surface-2)); border: 1px solid var(--line); border-radius: var(--radius); }
-  h2 { margin-block: 0.4rem 0.75rem; }
-  .contact__actions { display: grid; gap: 0.75rem; align-content: center; }
-  @media (min-width: 768px) { .contact__box { grid-template-columns: 1.4fr 1fr; align-items: center; } }
+  .contact { padding-block: 7rem 5rem; }
+  .box { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 3rem; padding: clamp(2rem, 6vw, 5rem); background: var(--surface); border: 1px solid var(--line); }
+  .box__text { display: flex; flex-direction: column; gap: 1.25rem; }
+  h2 { font-size: clamp(3rem, 8vw, 8rem); line-height: 0.9; }
+  .box__links { display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+  .phone { font: 800 clamp(2rem, 3.6vw, 3.25rem)/1.1 var(--font-display); text-decoration: none; }
+  .phone:hover, .ig:hover { color: var(--text); }
+  .ig { display: inline-flex; align-items: center; min-height: var(--tap); font: 500 0.95rem var(--font-mono); letter-spacing: 0.04em; color: var(--accent); }
 </style>

@@ -1,32 +1,38 @@
 ---
 import { ASK_ABOUT, SITE } from '../../data/site';
 import { askAboutMessage, whatsappHref } from '../../lib/whatsapp';
-import Icon from '../ui/Icon.astro';
+import SplitTitle from '../ui/SplitTitle.astro';
 ---
 
-<section class="section" aria-labelledby="ask-title">
-  <div class="container">
-    <p class="eyebrow">También lo hacemos</p>
-    <h2 id="ask-title">Lo viste en Instagram?</h2>
-    <p class="lead">Estos productos no están en la tienda todavía. Preguntanos por WhatsApp y te pasamos precio y talles.</p>
-    <ul class="chips">
-      {
-        ASK_ABOUT.map((a) => (
-          <li>
-            <a class="chip" href={whatsappHref(SITE.whatsapp, askAboutMessage(a.name))} target="_blank" rel="noopener">
-              <Icon name="whatsapp" size={16} /> {a.name}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+<section class="container ask" id="instagram" aria-labelledby="ask-title">
+  <div class="ask__head">
+    <h2 id="ask-title" data-title><SplitTitle text="¿Lo viste en Instagram?" accent={1} /></h2>
+    <p class="ask__lead" data-rv>Estos productos no están en la tienda todavía. Tocá el que te guste y te pasamos precio y talles por WhatsApp.</p>
   </div>
+  <ul class="list">
+    {
+      ASK_ABOUT.map((a) => (
+        <li data-rv>
+          <a class="item" href={whatsappHref(SITE.whatsapp, askAboutMessage(a.name))} target="_blank" rel="noopener">
+            <span class="item__name">{a.name}</span>
+            <span class="item__cta">Pedir precio y talles <span class="item__arrow" aria-hidden="true">↗</span></span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
 </section>
 
 <style>
-  h2 { margin-block: 0.4rem 0.75rem; }
-  .chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
-  .chip { display: inline-flex; align-items: center; gap: 0.5rem; min-height: var(--tap); padding-inline: 1rem; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); text-decoration: none; font-weight: 600; }
-  .chip:hover { border-color: var(--accent); }
-  .chip :global(svg) { color: var(--accent); }
+  .ask { padding-block: 5rem; }
+  .ask__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1.5rem; margin-bottom: 3rem; }
+  h2 { font-size: clamp(2.75rem, 7vw, 7rem); }
+  .ask__lead { max-width: 25rem; color: var(--text-2); }
+  .list { border-bottom: 1px solid var(--line); }
+  .list li { border-top: 1px solid var(--line); }
+  .item { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 5.25rem; padding: 0.75rem 0.25rem; text-decoration: none; }
+  .item__name { font: 800 clamp(1.75rem, 4vw, 3.25rem)/1 var(--font-display); text-transform: uppercase; }
+  .item__cta { display: flex; align-items: center; gap: 1rem; font: 500 0.8125rem var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); text-align: right; }
+  .item__arrow { display: inline-block; font-size: 1.75rem; line-height: 1; transition: transform 0.3s; }
+  .item:hover .item__arrow { transform: translate(6px, -6px); }
 </style>

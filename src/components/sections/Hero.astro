@@ -5,49 +5,61 @@ import { withBase } from '../../lib/url';
 import { SITE } from '../../data/site';
 import { formatCount } from '../../lib/format';
 import { generalMessage, whatsappHref } from '../../lib/whatsapp';
-import Button from '../ui/Button.astro';
-import Icon from '../ui/Icon.astro';
 ---
 
-<section class="hero">
-  <div class="container hero__grid">
+<section class="hero container" id="top" data-g="hero">
+  <p class="eyebrow" data-hero-fade>Indumentaria y accesorios para moteros</p>
+  <h1 data-hero-title>
+    <span class="hl" data-hero-line><span>Viajás en moto?</span></span>{' '}
+    <span class="hl" data-hero-line><span>Vestite y acampá</span></span>{' '}
+    <span class="hl" data-hero-line><span class="accent">para el camino.</span></span>
+  </h1>
+  <div class="hero__rule" data-underline aria-hidden="true"></div>
+
+  <div class="hero__grid">
     <div class="hero__copy">
-      <p class="eyebrow">Indumentaria y accesorios para moteros</p>
-      <h1>Viajás en moto? <span>Vestite y acampá para el camino.</span></h1>
-      <p class="lead">Camperas con protecciones, pantalón, chaleco y todo el camping que entra en la valija. Hecho para la ruta de tierra, no para la vidriera.</p>
-      <div class="hero__cta">
-        <Button variant="primary" href={`${withBase('/')}#indumentaria`}>Ver productos <Icon name="arrow" size={18} /></Button>
-        <Button variant="wa" href={whatsappHref(SITE.whatsapp, generalMessage())} target="_blank" rel="noopener"><Icon name="whatsapp" size={18} /> Hablame por WhatsApp</Button>
+      <p class="lead" data-hero-fade>Camperas con protecciones, pantalón, chaleco y todo el camping que entra en la valija. Hecho para la ruta de tierra, no para la vidriera.</p>
+      <div class="hero__cta" data-hero-fade>
+        <a class="btn btn--primary" data-mag href={`${withBase('/')}#indumentaria`}>Ver productos</a>
+        <a class="btn" data-mag href={whatsappHref(SITE.whatsapp, generalMessage())} target="_blank" rel="noopener">Hablame por WhatsApp</a>
       </div>
+      <ul class="stats" data-hero-fade aria-label="Datos de la marca">
+        <li><span class="stat__n" data-count={SITE.instagramFollowers}>{formatCount(SITE.instagramFollowers)}</span><span class="stat__l">seguidores en Instagram</span></li>
+        <li><span class="stat__n">Envíos</span><span class="stat__l">a todo el país</span></li>
+        <li><span class="stat__n">WA</span><span class="stat__l">consultas por WhatsApp</span></li>
+      </ul>
     </div>
-    <figure class="hero__photo">
-      <Image src={getImage('hero-ruta')} alt="El dueño de Ransser con campera y pantalón negros, parado junto a su moto en un camino de tierra" width={600} height={600} loading="eager" fetchpriority="high" sizes="(min-width: 900px) 30rem, 100vw" />
-      <figcaption>Foto real del catálogo de Ransser</figcaption>
+    <figure class="hero__fig">
+      <div class="hero__photo" data-hero-photo>
+        <Image class="hero__img" data-hero-photo-inner src={getImage('hero-ruta')} alt="El dueño de Ransser con campera y pantalón negros, parado junto a su moto en un camino de tierra" width={600} height={600} loading="eager" fetchpriority="high" sizes="(min-width: 900px) 40rem, 100vw" />
+        <span class="hero__tag" aria-hidden="true">KM 0</span>
+      </div>
+      <figcaption class="mono">Foto real del catálogo de Ransser</figcaption>
     </figure>
   </div>
-  <ul class="container trust" aria-label="Datos de la marca">
-    <li><Icon name="instagram" size={18} /> {formatCount(SITE.instagramFollowers)} seguidores en Instagram</li>
-    <li><Icon name="truck" size={18} /> Envíos a todo el país</li>
-    <li><Icon name="chat" size={18} /> Consultas por WhatsApp</li>
-  </ul>
 </section>
 
 <style>
-  .hero { padding-top: 1.5rem; background: radial-gradient(60rem 30rem at 85% 0%, rgb(255 107 26 / 12%), transparent 60%); }
-  .hero__grid { display: grid; gap: 1.75rem; align-items: center; }
-  .hero__photo { margin: 0; order: -1; }
-  .hero__photo :global(img) { width: 100%; max-width: 30rem; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: var(--radius); border: 1px solid var(--line); margin-inline: auto; }
-  .hero__photo figcaption { margin-top: 0.5rem; text-align: center; color: var(--text-2); font-size: 0.75rem; }
-  .hero__copy { display: grid; gap: 1.1rem; justify-items: start; }
-  h1 span { display: block; color: var(--accent); }
-  .hero__cta { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-  .trust { display: grid; gap: 0.25rem 1.5rem; margin-top: 2rem; padding-block: 1rem; border-top: 1px solid var(--line); color: var(--text-2); font-size: var(--fs-sm); }
-  .trust li { display: flex; align-items: center; gap: 0.5rem; min-height: 2rem; }
-  .trust :global(svg) { color: var(--accent); }
-  @media (min-width: 900px) {
-    .hero { padding-top: 3rem; }
-    .hero__grid { grid-template-columns: 1.1fr 0.9fr; gap: 3rem; }
-    .hero__photo { order: 0; }
-    .trust { grid-auto-flow: column; justify-content: start; }
-  }
+  .hero { position: relative; padding-block: 4rem 6rem; }
+  .hero .eyebrow { margin-bottom: 1.75rem; }
+  h1 { font-size: clamp(3.5rem, 9.6vw, 9.5rem); line-height: 0.88; }
+  .hl { display: block; overflow: hidden; padding-block: 0.1em 0.1em; margin-block: -0.1em -0.1em; }
+  .hl > span { display: block; }
+  .accent { color: var(--accent); }
+  .hero__rule { height: 10px; width: min(46%, 520px); margin-top: 1.1rem; background: repeating-linear-gradient(-45deg, var(--accent) 0 14px, var(--bg) 14px 24px); }
+  .hero__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: 3.5rem; margin-top: 4.5rem; align-items: end; }
+  .hero__copy { display: flex; flex-direction: column; gap: 2.25rem; }
+  .hero__copy .lead { max-width: 32rem; }
+  .hero__cta { display: flex; flex-wrap: wrap; gap: 0.9rem; }
+  .stats { display: flex; flex-wrap: wrap; gap: 1.25rem 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
+  .stats li { display: flex; flex-direction: column; gap: 2px; }
+  .stat__n { font: 900 2.75rem/1 var(--font-display); text-transform: uppercase; }
+  .stat__l { font: 400 0.8125rem var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-2); }
+  .hero__fig { margin: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+  .hero__photo { position: relative; overflow: hidden; aspect-ratio: 5 / 4; background: var(--surface); }
+  /* La imagen es 14 % más alta que el marco para poder desplazarla (parallax) sin dejar huecos. */
+  .hero__img { position: absolute; left: 0; width: 100%; top: -14%; height: 128%; object-fit: cover; object-position: 50% 30%; }
+  .hero__tag { position: absolute; top: 1.25rem; left: 1.25rem; padding: 0.4rem 0.65rem; background: var(--accent); color: var(--on-accent); font: 500 0.75rem var(--font-mono); letter-spacing: 0.1em; }
+  figcaption { font-size: 0.8125rem; color: var(--text-2); }
+  @media (max-width: 640px) { .hero { padding-block: 2.5rem 4rem; } .hero__grid { gap: 2.5rem; margin-top: 3rem; } }
 </style>

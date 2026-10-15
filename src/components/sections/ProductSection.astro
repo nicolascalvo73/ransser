@@ -1,34 +1,39 @@
 ---
 import type { Category, Product } from '../../types';
 import ProductCard from '../ui/ProductCard.astro';
+import SplitTitle from '../ui/SplitTitle.astro';
 
 interface Props {
   category: Category;
   products: Product[];
+  index: number;
+  /** Ancho mínimo de columna de la grilla (px). */
+  min?: number;
 }
-const { category, products } = Astro.props;
+const { category, products, index, min = 300 } = Astro.props;
+const n = products.length;
 ---
 
-<section class="section psec" id={category.id} aria-labelledby={`${category.id}-title`} style={`--accent:${category.accent}`}>
-  <div class="container">
-    <header class="psec__head">
-      <h2 id={`${category.id}-title`}>{category.name}</h2>
-      <p>{category.tagline}</p>
-    </header>
-    <ul class="grid">
-      {products.map((p) => (<li><ProductCard product={p} /></li>))}
-    </ul>
-  </div>
+<section class="container psec" id={category.id} aria-labelledby={`${category.id}-title`}>
+  <header class="psec__head">
+    <div>
+      <p class="eyebrow" data-rv>KM {String(index + 1).padStart(2, '0')} / {n} {n === 1 ? 'producto' : 'productos'}</p>
+      <h2 id={`${category.id}-title`} data-title><SplitTitle text={category.name} /></h2>
+    </div>
+    <p class="psec__tag" data-rv>{category.tagline}</p>
+  </header>
+  <ul class="grid" style={`--min:${min}px`}>
+    {products.map((p) => (<li><ProductCard product={p} /></li>))}
+  </ul>
 </section>
 
 <style>
-  .psec { border-top: 1px solid var(--line); }
-  .psec__head { display: grid; gap: 0.5rem; margin-bottom: 1.5rem; }
-  .psec__head h2 { padding-left: 0.9rem; border-left: 6px solid var(--accent); }
-  .psec__head p { color: var(--text-2); }
-  .grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+  .psec { padding-block: 5rem; }
+  .psec__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1.5rem; margin-bottom: 3.5rem; }
+  .psec__head .eyebrow { margin-bottom: 0.75rem; }
+  h2 { font-size: clamp(3rem, 8vw, 8rem); line-height: 0.9; }
+  .psec__tag { max-width: 24rem; color: var(--text-2); }
+  .grid { display: grid; gap: 2.5rem 1.25rem; grid-template-columns: repeat(auto-fit, minmax(min(var(--min), 100%), 1fr)); }
   .grid > li { display: flex; }
   .grid > li > :global(.card) { flex: 1; }
-  @media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (min-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
 </style>

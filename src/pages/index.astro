@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Marquee from '../components/sections/Marquee.astro';
 import Hero from '../components/sections/Hero.astro';
 import Categories from '../components/sections/Categories.astro';
 import ComboBanner from '../components/sections/ComboBanner.astro';
@@ -9,13 +10,16 @@ import AskAbout from '../components/sections/AskAbout.astro';
 import Contact from '../components/sections/Contact.astro';
 import { CATEGORIES } from '../data/categories';
 import { productsByCategory } from '../lib/products';
+
+const MIN = { indumentaria: 270, camping: 360, outlet: 320 } as const;
 ---
 
 <BaseLayout>
   <Hero />
+  <Marquee />
   <Categories />
   <ComboBanner />
-  {CATEGORIES.map((c) => (<ProductSection category={c} products={productsByCategory(c.id)} />))}
+  {CATEGORIES.map((c, i) => (<ProductSection category={c} products={productsByCategory(c.id)} index={i} min={MIN[c.id]} />))}
   <Shipping />
   <AskAbout />
   <Contact />

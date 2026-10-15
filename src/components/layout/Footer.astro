@@ -1,51 +1,37 @@
 ---
-import { Image } from 'astro:assets';
-import { getImage } from '../../lib/images';
 import { SITE } from '../../data/site';
 import { generalMessage, whatsappHref } from '../../lib/whatsapp';
-import Icon from '../ui/Icon.astro';
 
 const year = new Date().getFullYear();
 ---
 
-<footer class="footer">
+<footer class="footer" data-g="footer">
   <div class="container footer__grid">
     <div class="footer__brand">
-      <Image class="footer__logo" src={getImage('logo')} alt="Logo de Ransser" width={56} height={56} />
-      <p><strong>{SITE.fullName}</strong><br />{SITE.tagline}.</p>
+      <span class="footer__name">{SITE.fullName}</span>
+      <span>{SITE.tagline}.</span>
     </div>
     <ul class="footer__links">
-      <li>
-        <a href={whatsappHref(SITE.whatsapp, generalMessage())} target="_blank" rel="noopener"><Icon name="whatsapp" size={18} /> {SITE.whatsappLabel}</a>
-      </li>
-      <li>
-        <a href={SITE.instagram} target="_blank" rel="noopener"><Icon name="instagram" size={18} /> {SITE.instagramHandle}</a>
-      </li>
-      <li>
-        <a href={SITE.whatsappCatalog} target="_blank" rel="noopener"><Icon name="chat" size={18} /> Catálogo en WhatsApp</a>
-      </li>
+      <li><a href={whatsappHref(SITE.whatsapp, generalMessage())} target="_blank" rel="noopener">{SITE.whatsappLabel}</a></li>
+      <li><a href={SITE.instagram} target="_blank" rel="noopener">Instagram</a></li>
+      <li><a href={SITE.whatsappCatalog} target="_blank" rel="noopener">Catálogo en WhatsApp</a></li>
     </ul>
+    <div class="footer__legal">
+      <span>© {year} {SITE.name}.</span>
+      <span>Propuesta de rediseño de <a href={SITE.mondi} target="_blank" rel="noopener">Mondi Studio</a>.</span>
+      <span>Los precios mostrados son de ejemplo (relevados el 1/10/2026).</span>
+    </div>
   </div>
-  <div class="container footer__legal">
-    <p>© {year} {SITE.name}.</p>
-    <p>
-      Propuesta de rediseño de <a href={SITE.mondi} target="_blank" rel="noopener">Mondi Studio</a>. Los precios mostrados son de ejemplo (relevados el 1/10/2026).
-    </p>
-  </div>
+  <div class="bigword" data-bigword aria-hidden="true">Ransser</div>
 </footer>
 
 <style>
-  .footer { background: var(--surface); border-top: 1px solid var(--line); padding-top: 2.5rem; font-size: var(--fs-sm); color: var(--text-2); }
-  .footer__grid { display: grid; gap: 1.5rem; padding-bottom: 2rem; }
-  .footer__brand { display: flex; align-items: center; gap: 1rem; color: var(--text); }
-  .footer__logo { width: 56px; height: 56px; border-radius: 50%; }
-  .footer__links { display: grid; gap: 0.25rem; }
-  .footer__links a { display: inline-flex; align-items: center; gap: 0.5rem; min-height: var(--tap); text-decoration: none; }
+  .footer { position: relative; overflow: hidden; border-top: 1px solid var(--line); }
+  .footer__grid { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2rem 4rem; padding-block: 3.5rem 2rem; }
+  .footer__brand { display: flex; flex-direction: column; gap: 0.5rem; max-width: 21rem; color: var(--text-2); }
+  .footer__name { font: 900 2rem/1 var(--font-display); letter-spacing: 0.06em; text-transform: uppercase; color: var(--text); }
+  .footer__links a { display: inline-flex; align-items: center; min-height: var(--tap); text-decoration: none; }
   .footer__links a:hover, .footer__legal a:hover { color: var(--accent); }
-  .footer__legal { display: grid; gap: 0.25rem; padding-block: 1.25rem; border-top: 1px solid var(--line); }
-  @media (min-width: 768px) {
-    .footer__grid { grid-template-columns: 1fr auto; align-items: center; }
-    .footer__legal { grid-template-columns: auto 1fr; gap: 2rem; }
-    .footer__legal p:last-child { text-align: right; }
-  }
+  .footer__legal { display: flex; flex-direction: column; gap: 0.4rem; max-width: 22.5rem; font-size: 0.875rem; color: var(--text-2); }
+  .bigword { padding-inline: 1rem; font: 900 clamp(6.25rem, 25vw, 23.75rem)/0.8 var(--font-display); letter-spacing: 0.02em; text-align: center; text-transform: uppercase; color: transparent; -webkit-text-stroke: 2px var(--line); white-space: nowrap; user-select: none; }
 </style>

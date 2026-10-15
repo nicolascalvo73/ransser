@@ -9,37 +9,34 @@ interface Props {
   product: Pick<Product, 'image' | 'imageAlt' | 'category' | 'name'>;
   loading?: 'lazy' | 'eager';
   sizes?: string;
+  /** Ficha de producto: sin efectos de zoom. */
   big?: boolean;
 }
-const { product, loading = 'lazy', sizes = '(min-width: 1024px) 22rem, 90vw', big = false } = Astro.props;
+const { product, loading = 'lazy', sizes = '(min-width: 1024px) 26rem, 90vw', big = false } = Astro.props;
 const category = getCategory(product.category);
+const fx = !big;
 ---
 
-<div class:list={['pimg', { 'pimg--big': big }]} style={`--accent:${category.accent}`}>
-  {
-    product.image ? (
-      <Image src={getImage(product.image)} alt={product.imageAlt} {loading} {sizes} class="pimg__img" />
-    ) : (
-      // Placeholder honesto: la foto real todavía no se pudo descargar de las fuentes del negocio.
-      <div class="pimg__ph" role="img" aria-label={`Foto real a cargar: ${product.imageAlt}`}>
-        <Icon name={category.icon} size={big ? 96 : 64} />
-        <span class="pimg__label"><Icon name="camera" size={14} /> Foto real a cargar</span>
-      </div>
-    )
-  }
+<div class:list={['pimg', { 'pimg--big': big }]}>
+  <div class="pimg__hover" data-ph-hover={fx ? '' : undefined}>
+    {
+      product.image ? (
+        <Image src={getImage(product.image)} alt={product.imageAlt} {loading} {sizes} class="pimg__img" data-ph-inner={fx ? '' : undefined} />
+      ) : (
+        // Placeholder: la foto real todavía no está cargada.
+        <div class="pimg__ph" role="img" aria-label={`Foto real a cargar: ${product.imageAlt}`}>
+          <Icon name={category.icon} size={big ? 96 : 64} />
+          <span class="pimg__label">Foto real a cargar</span>
+        </div>
+      )
+    }
+  </div>
 </div>
 
 <style>
-  .pimg { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: var(--radius) var(--radius) 0 0; background: var(--surface-2); }
-  .pimg--big { border-radius: var(--radius); }
+  .pimg { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--surface); }
+  .pimg__hover { position: absolute; inset: 0; }
   .pimg__img { width: 100%; height: 100%; object-fit: cover; }
-  .pimg__ph {
-    height: 100%; display: grid; place-content: center; justify-items: center; gap: 0.9rem; color: var(--accent);
-    background:
-      repeating-linear-gradient(135deg, transparent 0 14px, rgb(255 255 255 / 3%) 14px 15px),
-      radial-gradient(circle at 50% 35%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 60%),
-      var(--surface-2);
-  }
-  .pimg__ph :global(svg:first-child) { opacity: 0.9; }
-  .pimg__label { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-2); }
+  .pimg__ph { height: 100%; display: grid; place-content: center; justify-items: center; gap: 0.9rem; color: var(--text-2); background: repeating-linear-gradient(135deg, rgb(241 240 234 / 5%) 0 2px, transparent 2px 14px), var(--surface); }
+  .pimg__label { font: 500 0.75rem var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; }
 </style>

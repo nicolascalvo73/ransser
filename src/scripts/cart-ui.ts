@@ -34,10 +34,8 @@ const renderRow = (item: CartItem) => {
 
 const render = (items: CartItem[]) => {
   const count = cartCount(items);
-  if (badge) {
-    badge.textContent = String(count);
-    (badge as HTMLElement).hidden = count === 0;
-  }
+  if (badge) badge.textContent = String(count);
+  $('[data-cart-open]')?.setAttribute('aria-label', `Abrir tu pedido, ${count} ${count === 1 ? 'producto' : 'productos'}`);
   if (!list || !rowTpl) return;
   list.replaceChildren(...items.map(renderRow));
   if (empty) (empty as HTMLElement).hidden = items.length > 0;
@@ -103,3 +101,63 @@ const handleAdd = (btn: HTMLButtonElement) => {
   btn.classList.add('is-added');
   setTimeout(() => btn.classList.remove('is-added'), 1200);
 };
+
+/* ---------- Modal "Elegir talle" ---------- */
+const modal = $<HTMLDialogElement>('#size-modal');
+const sizesBox = $('[data-modal-sizes]');
+const confirmBtn = $<HTMLButtonElement>('[data-modal-confirm]');
+const modalError = $<HTMLElement>('[data-modal-error]');
+let picking: { id: string; name: string; price: number } | null = null;
+let chosen: string | null = null;
+
+const setChosen = (size: string | null) => {
+  chosen = size;
+  sizesBox?.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.size === size)));
+  if (confirmBtn) confirmBtn.disabled = size === null;
+  if (modalError && size) modalError.hidden = true;
+};
+
+const openSizeModal = (btn: HTMLElement) => {
+  const { id, name, price, priceText, sizes, href } = btn.dataset;
+  if (!modal || !sizesBox || !id || !name || !sizes) return;
+  picking = { id, name, price: Number(price) };
+  $('[data-modal-name]')!.textContent = name;
+  $('[data-modal-price]')!.textContent = priceText ?? '';
+  $('[data-modal-link]')!.setAttribute('href', href ?? '#');
+  $('[data-modal-note]')!.textContent =
+    btn.hasAttribute('data-sizes-placeholder')
+      ? 'Talles de ejemplo: los reales se confirman antes del pago, junto con stock y costo de envío.'
+      : 'Confirmamos stock, talle y costo de envío antes del pago.';
+  sizesBox.replaceChildren(
+    ...sizes.split(',').map((s) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.dataset.size = s;
+      b.textContent = s;
+      b.setAttribute('aria-pressed', 'false');
+      return b;
+    }),
+  );
+  setChosen(null);
+  modal.showModal();
+};
+
+const closeSizeModal = () => modal?.close();
+
+document.addEventListener('click', (e) => {
+  const target = e.target as HTMLElement;
+  const pick = target.closest<HTMLElement>('[data-pick-size]');
+  if (pick) return openSizeModal(pick);
+  if (target === modal || target.closest('[data-modal-close]')) return closeSizeModal();
+  const sizeBtn = target.closest<HTMLElement>('[data-modal] [data-size]');
+  if (sizeBtn) return setChosen(sizeBtn.dataset.size ?? null);
+  if (target.closest('[data-modal-confirm]')) {
+    if (!picking || !chosen) {
+      if (modalError) modalError.hidden = false;
+      return;
+    }
+    add({ id: picking.id, name: picking.name, price: picking.price, variant: chosen });
+    announce(`${picking.name}, talle ${chosen} sumado al pedido.`);
+    closeSizeModal();
+  }
+});

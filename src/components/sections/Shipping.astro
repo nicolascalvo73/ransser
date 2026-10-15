@@ -1,23 +1,25 @@
 ---
-import Icon from '../ui/Icon.astro';
+import SplitTitle from '../ui/SplitTitle.astro';
 
 const steps = [
-  { icon: 'cart', title: 'Elegís', text: 'Armá tu pedido en la web o consultá por WhatsApp.' },
-  { icon: 'shield', title: 'Confirmamos', text: 'Te confirmamos stock, talle y costo de envío antes de que pagues.' },
-  { icon: 'truck', title: 'Te llega', text: 'Enviamos a todo el país. Coordinamos el despacho con vos.' },
-] as const;
+  { title: 'Elegís', text: 'Armá tu pedido en la web o consultá por WhatsApp.' },
+  { title: 'Confirmamos', text: 'Te confirmamos stock, talle y costo de envío antes de que pagues.' },
+  { title: 'Te llega', text: 'Enviamos a todo el país. Coordinamos el despacho con vos.' },
+];
 ---
 
-<section class="section ship" id="envios" aria-labelledby="envios-title">
-  <div class="container">
-    <p class="eyebrow">Envíos a todo el país</p>
-    <h2 id="envios-title">Vivas donde vivas, te llega</h2>
-    <ol class="steps">
+<section class="container ship" id="envios" aria-labelledby="envios-title">
+  <p class="eyebrow" data-rv>KM 04 / Envíos a todo el país</p>
+  <h2 id="envios-title" data-title><SplitTitle text="Vivas donde vivas, te llega" accent={2} /></h2>
+  <div class="steps" data-steps>
+    <div class="steps__bar" aria-hidden="true"></div>
+    <div class="steps__line" data-line aria-hidden="true"></div>
+    <ol>
       {
         steps.map((s, i) => (
-          <li class="step">
-            <span class="step__n">{i + 1}</span>
-            <Icon name={s.icon} size={28} />
+          <li data-rv>
+            <span class="dia" aria-hidden="true"></span>
+            <span class="n">{String(i + 1).padStart(2, '0')}</span>
             <h3>{s.title}</h3>
             <p>{s.text}</p>
           </li>
@@ -28,12 +30,18 @@ const steps = [
 </section>
 
 <style>
-  .ship { background: var(--surface); border-block: 1px solid var(--line); }
-  h2 { margin-top: 0.4rem; max-width: 22ch; }
-  .steps { display: grid; gap: 1rem; margin-top: 1.75rem; counter-reset: s; }
-  .step { position: relative; display: grid; gap: 0.5rem; padding: 1.25rem; background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); }
-  .step :global(svg) { color: var(--accent); }
-  .step__n { position: absolute; top: 0.9rem; right: 1.1rem; font: 800 2.4rem/1 var(--font-display); color: var(--line); }
-  .step p { color: var(--text-2); }
-  @media (min-width: 768px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+  .ship { padding-block: 7rem 5rem; }
+  .ship .eyebrow { margin-bottom: 0.75rem; }
+  h2 { font-size: clamp(2.75rem, 7vw, 7rem); margin-bottom: 4.5rem; }
+  .steps { position: relative; }
+  .steps__bar, .steps__line { position: absolute; left: 0; right: 0; top: 7px; height: 2px; }
+  .steps__bar { background: var(--line); }
+  .steps__line { background: var(--accent); }
+  /* Sin movimiento la línea queda dibujada entera; GSAP la anima de 0 a 1 sólo si corre. */
+  ol { position: relative; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 3rem 2rem; }
+  li { display: flex; flex-direction: column; gap: 0.9rem; }
+  .dia { display: block; width: 16px; height: 16px; background: var(--accent); transform: rotate(45deg); }
+  .n { margin-top: 1rem; font: 500 0.875rem var(--font-mono); letter-spacing: 0.1em; color: var(--text-2); }
+  h3 { font-size: 4rem; font-weight: 900; line-height: 0.95; }
+  li p { max-width: 21rem; color: var(--text-3); text-wrap: pretty; }
 </style>

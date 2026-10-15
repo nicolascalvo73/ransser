@@ -22,10 +22,8 @@
   --fs-h2: clamp(2.8rem, 1.6rem + 5vw, 8rem);
   --fs-h1: clamp(3.5rem, 1.2rem + 9.6vw, 9.5rem);
 
-  /* Espaciado / forma (la referencia es angular: sin radios) */
+  /* Espaciado (la referencia es angular: sin radios de borde) */
   --gutter: 1.25rem;
-  --radius: 0;
-  --radius-sm: 0;
   --max: 85rem; /* 1360 px */
   --tap: 2.75rem; /* 44 px */
   --shadow: 0 10px 30px rgb(0 0 0 / 45%);

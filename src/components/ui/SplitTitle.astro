@@ -1,0 +1,18 @@
+---
+interface Props {
+  text: string;
+  /** Cantidad de palabras finales en naranja. */
+  accent?: number;
+}
+const { text, accent = 0 } = Astro.props;
+const words = text.split(' ');
+---
+
+{
+  words.map((w, i) => (
+    <>
+      <span class="w"><span class:list={['wi', { accent: i >= words.length - accent }]}>{w}</span></span>
+      {i < words.length - 1 && ' '}
+    </>
+  ))
+}

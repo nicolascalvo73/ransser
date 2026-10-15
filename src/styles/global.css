@@ -62,3 +62,15 @@ s { color: var(--text-2); }
 .btn--block { width: 100%; }
 .btn[disabled], .btn[aria-disabled='true'] { opacity: 0.4; cursor: not-allowed; }
 .btn[disabled]:hover { background: transparent; color: var(--text); }
+
+.btn--dark { background: var(--bg); border-color: var(--bg); color: var(--text); }
+.btn--dark:hover { background: var(--text); border-color: var(--text); color: var(--on-accent); }
+.btn.is-added { background: var(--text); border-color: var(--text); color: var(--on-accent); }
+
+/* Títulos partidos por palabra (se arma en el build; el movimiento es opcional). */
+.w { display: inline-block; overflow: hidden; vertical-align: top; padding-block: 0.1em 0.12em; margin-block: -0.1em -0.12em; }
+.wi { display: inline-block; }
+.wi.accent { color: var(--accent); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: var(--accent); transform: scaleX(0); transform-origin: 0 50%; z-index: 120; pointer-events: none; }

@@ -27,7 +27,7 @@ const description = `${product.summary} ${product.price !== null ? `${formatPric
 ---
 
 <BaseLayout title={`${product.name} | Ransser`} description={description} jsonLd={[productStructuredData(product, canonical)]}>
-  <article class="container pdp" style={`--accent:${category.accent}`}>
+  <article class="container pdp">
     <nav class="crumbs" aria-label="Migas de pan">
       <a href={withBase('/')}>Inicio</a> <span aria-hidden="true">/</span>
       <a href={`${withBase('/')}#${category.id}`}>{category.name}</a> <span aria-hidden="true">/</span>
@@ -41,7 +41,7 @@ const description = `${product.summary} ${product.price !== null ? `${formatPric
 
       <div class="pdp__info">
         {product.badge && <p class="pdp__badge">{product.badge}</p>}
-        <h1>{product.name}</h1>
+        <h1 class="pdp__title">{product.name}</h1>
 
         <p class="pdp__price">
           {
@@ -63,7 +63,7 @@ const description = `${product.summary} ${product.price !== null ? `${formatPric
         {
           product.features.length > 0 && (
             <ul class="feats" aria-label="Características">
-              {product.features.map((f) => (<li><Icon name="check" size={16} /> {f}</li>))}
+              {product.features.map((f) => (<li>{f}</li>))}
             </ul>
           )
         }
@@ -110,7 +110,7 @@ const description = `${product.summary} ${product.price !== null ? `${formatPric
                   data-qty-from="#qty"
                   data-variant-from={hasSizes ? '#size-picker' : undefined}
                 >
-                  <Icon name="plus" size={18} /> Sumar al pedido
+                  Sumar al pedido
                 </button>
               </div>
             </div>
@@ -118,7 +118,7 @@ const description = `${product.summary} ${product.price !== null ? `${formatPric
         }
 
         <a class="btn btn--wa btn--block" href={whatsappHref(SITE.whatsapp, productMessage(product))} target="_blank" rel="noopener">
-          <Icon name="whatsapp" size={18} /> Consultar por WhatsApp
+          Consultar por WhatsApp
         </a>
 
         {product.sizes && <SizeTable sizes={product.sizes} placeholder={product.sizes_is_placeholder} />}
@@ -139,56 +139,55 @@ const description = `${product.summary} ${product.price !== null ? `${formatPric
 </BaseLayout>
 
 <style>
-  .pdp { padding-block: 1rem 3rem; }
-  .crumbs { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; min-height: var(--tap); color: var(--text-2); font-size: var(--fs-sm); }
+  .pdp { padding-block: 1rem 5rem; }
+  .crumbs { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; min-height: var(--tap); font: 400 0.8125rem var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-2); }
   .crumbs a { text-decoration: none; display: inline-flex; align-items: center; min-height: var(--tap); }
   .crumbs a:hover { color: var(--accent); }
   .crumbs [aria-current] { color: var(--text); }
-  .pdp__grid { display: grid; gap: 1.5rem; margin-top: 0.5rem; }
-  .pdp__info { display: grid; gap: 1rem; align-content: start; }
-  .pdp__badge { justify-self: start; padding: 0.2rem 0.6rem; border-radius: 999px; background: var(--accent); color: var(--bg); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+  .pdp__grid { display: grid; gap: 2rem; margin-top: 0.5rem; }
+  .pdp__info { display: grid; gap: 1.1rem; align-content: start; }
+  .pdp__badge { justify-self: start; padding: 0.4rem 0.65rem; background: var(--accent); color: var(--on-accent); font: 500 0.75rem var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; }
+  .pdp__title { font-size: clamp(3rem, 6vw, 5.5rem); line-height: 0.9; }
   .pdp__price { display: flex; align-items: baseline; gap: 0.75rem; flex-wrap: wrap; }
-  .pdp__price strong { font: 800 clamp(2.2rem, 7vw, 3rem)/1 var(--font-display); color: var(--accent); }
-  .pdp__price s { color: var(--text-2); }
-  .pdp__ask { color: var(--text) !important; }
-  .pdp__sample { color: var(--text-2); font-size: 0.8rem; margin-top: -0.5rem; }
-  .pdp__desc { color: var(--text); max-width: 60ch; }
+  .pdp__price strong { font: 900 clamp(2.75rem, 7vw, 4rem)/1 var(--font-display); color: var(--accent); }
+  .pdp__ask { color: var(--text-3) !important; }
+  .pdp__sample { color: var(--text-2); font: 400 0.8125rem var(--font-mono); letter-spacing: 0.04em; margin-top: -0.5rem; }
+  .pdp__desc { color: var(--text-3); max-width: 60ch; font-size: 1.125rem; text-wrap: pretty; }
   .feats { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  .feats li { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.3rem 0.7rem; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; font-size: var(--fs-sm); }
-  .feats :global(svg) { color: var(--accent); }
-  .specs { display: grid; grid-template-columns: auto 1fr; gap: 0.35rem 1.25rem; margin: 0; padding: 1rem; background: var(--surface); border-radius: var(--radius-sm); font-size: var(--fs-sm); }
-  .specs dt { color: var(--text-2); }
+  .feats li { padding: 0.35rem 0.75rem; border: 1px solid var(--line-2); font: 400 0.8125rem var(--font-mono); letter-spacing: 0.04em; text-transform: uppercase; }
+  .specs { display: grid; grid-template-columns: auto 1fr; gap: 0.4rem 1.5rem; margin: 0; padding: 1.1rem 1.25rem; background: var(--surface); border: 1px solid var(--line); font-size: 0.95rem; }
+  .specs dt { color: var(--text-2); font: 400 0.8125rem var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; align-self: center; }
   .specs dd { margin: 0; }
 
-  .buy { display: grid; gap: 1rem; padding-top: 0.5rem; }
+  .buy { display: grid; gap: 1.1rem; padding-top: 0.5rem; }
   .sizepick { margin: 0; padding: 0; border: 0; display: grid; gap: 0.5rem; }
-  .sizepick legend { padding: 0; font-weight: 700; margin-bottom: 0.5rem; }
-  .sizepick small { font-weight: 400; color: var(--text-2); }
-  .sizepick__opts { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .sizepick legend { padding: 0; margin-bottom: 0.6rem; font: 500 0.8125rem var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; }
+  .sizepick small { color: var(--text-2); }
+  .sizepick__opts { display: flex; flex-wrap: wrap; gap: 0.6rem; }
   .size { position: relative; }
   .size input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
-  .size span { display: grid; place-items: center; min-width: var(--tap); min-height: var(--tap); padding-inline: 0.75rem; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--surface); font-weight: 700; }
-  .size input:checked + span { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+  .size span { display: grid; place-items: center; min-width: 3.5rem; min-height: 3rem; padding-inline: 1rem; border: 1.5px solid var(--line-2); font-weight: 600; transition: background-color 0.2s, border-color 0.2s, color 0.2s; }
+  .size:hover span { border-color: var(--text); }
+  .size input:checked + span { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
   .size input:focus-visible + span { outline: 3px solid var(--accent); outline-offset: 3px; }
-  .sizepick__err { color: var(--accent); font-size: var(--fs-sm); }
+  .sizepick__err { color: var(--accent); font-size: 0.9rem; font-weight: 600; }
+  .sizepick__err::before { content: 'Error: '; }
   .sizepick__err[hidden] { display: none; }
 
   .qtyrow { display: grid; grid-template-columns: auto 1fr; gap: 0.75rem; }
-  .qty { display: inline-flex; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--surface); }
-  .qty button { display: grid; place-items: center; width: var(--tap); min-height: var(--tap); background: none; border: 0; color: var(--text); cursor: pointer; }
-  .qty button:hover { background: var(--surface-2); }
-  .qty input { width: 3rem; text-align: center; background: none; border: 0; color: var(--text); font: 700 1rem var(--font-body); -moz-appearance: textfield; appearance: textfield; }
+  .qty { display: inline-flex; border: 1.5px solid var(--line-2); }
+  .qty button { display: grid; place-items: center; width: 3rem; min-height: 3rem; background: none; border: 0; color: var(--text); cursor: pointer; }
+  .qty button:hover { background: var(--surface); }
+  .qty input { width: 3rem; text-align: center; background: none; border: 0; color: var(--text); font: 500 1rem var(--font-mono); -moz-appearance: textfield; appearance: textfield; }
   .qty input::-webkit-outer-spin-button, .qty input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-  :global(.btn.is-added) { background: var(--accent) !important; color: var(--bg) !important; }
 
-  .more { margin-top: 3.5rem; display: grid; gap: 1.25rem; }
-  .more__grid { display: grid; gap: 1rem; }
+  .more { margin-top: 5rem; display: grid; gap: 2rem; }
+  .more h2 { font-size: clamp(2.5rem, 5vw, 4.5rem); }
+  .more__grid { display: grid; gap: 2.5rem 1.25rem; grid-template-columns: repeat(auto-fit, minmax(min(270px, 100%), 1fr)); }
   .more__grid > li { display: flex; }
   .more__grid > li > :global(.card) { flex: 1; }
-  @media (min-width: 640px) { .more__grid { grid-template-columns: repeat(2, 1fr); } }
   @media (min-width: 900px) {
-    .pdp__grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
+    .pdp__grid { grid-template-columns: 1fr 1fr; gap: 3.5rem; }
     .pdp__media { position: sticky; top: 7rem; align-self: start; }
-    .more__grid { grid-template-columns: repeat(3, 1fr); }
   }
 </style>

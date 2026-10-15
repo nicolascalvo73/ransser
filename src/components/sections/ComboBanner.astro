@@ -2,24 +2,25 @@
 import { formatPrice } from '../../lib/format';
 import { getProduct, productHref } from '../../lib/products';
 import { withBase } from '../../lib/url';
-import Button from '../ui/Button.astro';
-import Icon from '../ui/Icon.astro';
 
 const combo = getProduct('combo-tarp-bolsa');
 ---
 
 {
   combo && combo.price !== null && (
-    <section class="combo" aria-labelledby="combo-title">
-      <div class="container combo__box">
-        <div class="combo__text">
-          <p class="eyebrow">Combo en promo</p>
-          <h2 id="combo-title">Techo y cama para el viaje</h2>
-          <p class="lead">Tarp 3x3 más bolsa de dormir triple capa, en un solo pedido.</p>
-        </div>
-        <div class="combo__buy">
-          <p class="combo__price">{formatPrice(combo.price)}</p>
-          <Button variant="primary" href={withBase(productHref(combo))}>Ver el combo <Icon name="arrow" size={18} /></Button>
+    <section class="container promo" id="promo" aria-labelledby="combo-title">
+      <div class="promo__box" data-rv>
+        <div class="promo__stripes" data-stripes aria-hidden="true" />
+        <div class="promo__in">
+          <div class="promo__text">
+            <p class="promo__eyebrow">Combo en promo</p>
+            <h2 id="combo-title">Techo y cama para el viaje</h2>
+            <p class="promo__lead">Tarp 3x3 más bolsa de dormir triple capa, en un solo pedido.</p>
+          </div>
+          <div class="promo__buy">
+            <span class="promo__price">{formatPrice(combo.price)}</span>
+            <a class="btn btn--dark" data-mag href={withBase(productHref(combo))}>Ver el combo</a>
+          </div>
         </div>
       </div>
     </section>
@@ -27,10 +28,14 @@ const combo = getProduct('combo-tarp-bolsa');
 }
 
 <style>
-  .combo { padding-block: 0 clamp(2rem, 6vw, 3.5rem); }
-  .combo__box { display: grid; gap: 1.25rem; padding: clamp(1.5rem, 5vw, 2.5rem); background: linear-gradient(120deg, rgb(255 107 26 / 16%), var(--surface) 70%); border: 1px solid var(--accent); border-radius: var(--radius); }
-  h2 { margin-block: 0.4rem 0.6rem; }
-  .combo__buy { display: grid; gap: 0.75rem; align-content: center; justify-items: start; }
-  .combo__price { font: 800 clamp(2.5rem, 8vw, 3.5rem)/1 var(--font-display); color: var(--accent); }
-  @media (min-width: 768px) { .combo__box { grid-template-columns: 1.5fr 1fr; align-items: center; } }
+  .promo { padding-block: 5rem; }
+  .promo__box { position: relative; overflow: hidden; background: var(--accent); color: var(--on-accent); padding: clamp(2rem, 6vw, 5.5rem); }
+  .promo__stripes { position: absolute; top: 0; bottom: 0; right: -10%; width: 55%; background: repeating-linear-gradient(-45deg, rgb(14 15 16 / 10%) 0 22px, transparent 22px 44px); }
+  .promo__in { position: relative; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 2.5rem; }
+  .promo__text { flex: 1 1 420px; display: flex; flex-direction: column; gap: 1.25rem; }
+  .promo__eyebrow { font: 500 0.8125rem var(--font-mono); letter-spacing: 0.14em; text-transform: uppercase; }
+  h2 { font-size: clamp(3rem, 7.4vw, 7.5rem); line-height: 0.9; }
+  .promo__lead { max-width: 30rem; font-size: 1.25rem; font-weight: 500; }
+  .promo__buy { display: flex; flex-direction: column; align-items: flex-start; gap: 1.25rem; }
+  .promo__price { font: 900 clamp(3.5rem, 7vw, 7rem)/0.9 var(--font-display); }
 </style>

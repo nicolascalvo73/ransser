@@ -1,0 +1,19 @@
+---
+const items = ['Hecho para la ruta de tierra', 'Envíos a todo el país', 'Pedí por web o WhatsApp', 'Camperas · Pantalón · Camping'];
+---
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track" data-marquee>
+    {[0, 1].map(() => (
+      <div class="marquee__group">
+        {items.map((t) => (<><span>{t}</span><span>✦</span></>))}
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .marquee { overflow: hidden; background: var(--accent); color: var(--on-accent); border-block: 1px solid var(--bg); }
+  .marquee__track { display: flex; width: max-content; white-space: nowrap; font: 800 2.5rem/1 var(--font-display); letter-spacing: 0.04em; text-transform: uppercase; }
+  .marquee__group { display: flex; gap: 2.5rem; padding: 1.1rem 1.25rem; }
+</style>

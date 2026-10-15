@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Icon from '../components/ui/Icon.astro';
 import { MP_CHECKOUT_URL } from '../config/checkout';
 import { PROVINCES } from '../lib/checkout-form';
 import { SITE } from '../data/site';
@@ -31,8 +30,7 @@ const home = withBase('/');
     <h1>Confirmar pedido</h1>
 
     <section class="empty" data-no-items hidden>
-      <Icon name="cart" size={44} />
-      <p><strong>Tu pedido está vacío.</strong></p>
+      <p class="empty__t">Tu pedido está vacío.</p>
       <p>Sumá productos y volvé para confirmarlo.</p>
       <a class="btn btn--primary" href={`${home}#indumentaria`}>Ver productos</a>
     </section>
@@ -75,8 +73,8 @@ const home = withBase('/');
         </div>
 
         <div class="pay">
-          <button class="btn btn--primary btn--block" type="submit" data-pay>Pagar con Mercado Pago <Icon name="arrow" size={18} /></button>
-          <a class="btn btn--wa btn--block" data-wa-order href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noopener"><Icon name="whatsapp" size={18} /> Consultar por WhatsApp</a>
+          <button class="btn btn--primary btn--block" type="submit" data-pay>Pagar con Mercado Pago</button>
+          <a class="btn btn--wa btn--block" data-wa-order href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noopener">Consultar por WhatsApp</a>
           <p class="note" role="status" aria-live="polite" data-checkout-status></p>
           <p class="note">Demo: el botón de pago lleva a un link de ejemplo de Mercado Pago. El cobro real se conecta al entregar el sitio.</p>
         </div>
@@ -92,14 +90,14 @@ const home = withBase('/');
       <p class="srow__variant"></p>
       <p class="srow__unit"></p>
       <div class="srow__qty">
-        <button type="button" data-qty-dec aria-label="Restar una unidad"><Icon name="minus" size={16} /></button>
+        <button type="button" data-qty-dec aria-label="Restar una unidad">−</button>
         <output class="srow__n"></output>
-        <button type="button" data-qty-inc aria-label="Sumar una unidad"><Icon name="plus" size={16} /></button>
+        <button type="button" data-qty-inc aria-label="Sumar una unidad">+</button>
       </div>
     </div>
     <div class="srow__side">
       <p class="srow__price"></p>
-      <button class="srow__remove" type="button" data-remove aria-label="Quitar del pedido"><Icon name="trash" size={18} /></button>
+      <button class="srow__remove" type="button" data-remove aria-label="Quitar del pedido">Quitar</button>
     </div>
   </li>
 </template>
@@ -110,38 +108,41 @@ const home = withBase('/');
 
 <style is:global>
   .checkout { padding-block: 1.5rem 4rem; display: grid; gap: 1.5rem; }
-  .checkout h2 { font-size: 1.9rem; }
-  .checkout .empty { display: grid; justify-items: center; gap: 0.75rem; padding-block: 3rem; text-align: center; color: var(--text-2); }
+  .checkout h1 { font-size: clamp(3.5rem, 8vw, 7rem); }
+  .checkout h2 { font-size: 2.5rem; line-height: 1; }
+  .checkout .empty__t { font: 800 2.5rem/1 var(--font-display); text-transform: uppercase; color: var(--text); }
+  .checkout .empty { display: grid; justify-items: start; gap: 0.75rem; padding-block: 3rem; text-align: center; color: var(--text-2); }
   .checkout .empty[hidden], .checkout .layout[hidden] { display: none; }
   .checkout .layout { display: grid; gap: 1.5rem; align-items: start; }
-  .checkout .summary, .checkout .form { display: grid; gap: 1rem; padding: 1.25rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+  .checkout .summary, .checkout .form { display: grid; gap: 1rem; padding: 1.25rem; background: var(--surface); border: 1px solid var(--line); }
   .checkout .note { color: var(--text-2); font-size: 0.8rem; }
   .checkout .slist { display: grid; }
   .srow { display: flex; justify-content: space-between; gap: 1rem; padding-block: 0.9rem; border-bottom: 1px solid var(--line); }
-  .srow__name { font-weight: 600; line-height: 1.3; }
-  .srow__variant, .srow__unit { color: var(--text-2); font-size: var(--fs-sm); }
+  .srow__name { font: 800 1.625rem/1.05 var(--font-display); text-transform: uppercase; }
+  .srow__variant, .srow__unit { color: var(--text-2); font: 400 0.8125rem var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; }
   .srow__variant:empty { display: none; }
-  .srow__qty { display: inline-flex; align-items: center; margin-top: 0.5rem; border: 1px solid var(--line); border-radius: var(--radius-sm); }
-  .srow__qty button { display: grid; place-items: center; width: var(--tap); height: 2.25rem; background: none; border: 0; color: var(--text); cursor: pointer; }
-  .srow__qty button:hover { background: var(--surface-2); }
-  .srow__n { min-width: 2rem; text-align: center; font-weight: 700; }
+  .srow__qty { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 0.6rem; }
+  .srow__qty button { display: grid; place-items: center; min-width: var(--tap); min-height: var(--tap); background: none; border: 1.5px solid var(--text); color: var(--text); font: 600 1.25rem var(--font-body); cursor: pointer; transition: background-color 0.2s, color 0.2s; }
+  .srow__qty button:hover { background: var(--text); color: var(--on-accent); }
+  .srow__n { min-width: 2.25rem; text-align: center; font: 500 1rem var(--font-mono); }
   .srow__side { display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between; }
-  .srow__price { font-weight: 700; color: var(--accent); }
-  .srow__remove { display: grid; place-items: center; width: var(--tap); height: 2.25rem; background: none; border: 0; color: var(--text-2); cursor: pointer; }
+  .srow__price { font: 900 1.625rem/1 var(--font-display); white-space: nowrap; }
+  .srow__remove { min-height: var(--tap); padding-inline: 0.5rem; background: none; border: 0; color: var(--text-2); text-decoration: underline; cursor: pointer; font: inherit; }
   .srow__remove:hover { color: var(--accent); }
   .stotal { display: flex; justify-content: space-between; align-items: baseline; font-size: var(--fs-lg); }
-  .stotal strong { font: 800 2.2rem/1 var(--font-display); color: var(--text); }
+  .stotal strong { font: 900 3rem/1 var(--font-display); color: var(--text); }
   .linkbtn { justify-self: start; min-height: var(--tap); background: none; border: 0; color: var(--text-2); text-decoration: underline; cursor: pointer; }
   .linkbtn:hover { color: var(--text); }
 
   .fields { display: grid; gap: 0.9rem; }
   .field { display: grid; gap: 0.35rem; }
-  .field label { font-size: var(--fs-sm); font-weight: 600; }
-  .field input, .field select, .field textarea { width: 100%; min-height: var(--tap); padding: 0.6rem 0.8rem; background: var(--bg); color: var(--text); border: 1px solid var(--line); border-radius: var(--radius-sm); font: inherit; }
+  .field label { font: 500 0.8125rem var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; }
+  .field input, .field select, .field textarea { width: 100%; min-height: var(--tap); padding: 0.6rem 0.8rem; background: var(--bg); color: var(--text); border: 1.5px solid var(--line-2); font: inherit; }
   .field textarea { resize: vertical; }
   .field input:hover, .field select:hover, .field textarea:hover { border-color: var(--line-2); }
   .field [aria-invalid] { border-color: var(--accent); }
-  .field .err { color: var(--accent); font-size: var(--fs-sm); }
+  .field .err { color: var(--accent); font-size: 0.9rem; font-weight: 600; }
+  .field .err::before { content: 'Error: '; }
   .field .err[hidden] { display: none; }
   .pay { display: grid; gap: 0.75rem; margin-top: 0.5rem; }
   .pay .btn[disabled] { opacity: 0.6; cursor: progress; }

@@ -6,20 +6,18 @@ import { SITE } from '../../data/site';
 import { withBase } from '../../lib/url';
 import type { Product } from '../../types';
 import ProductImage from './ProductImage.astro';
-import Icon from './Icon.astro';
 
 interface Props {
   product: Product;
 }
 const { product } = Astro.props;
-const hasSizes = product.sizes !== null;
 const href = withBase(productHref(product));
 ---
 
-<article class="card">
+<article class="card" data-card data-rv>
   <a class="card__media" href={href} tabindex="-1" aria-hidden="true">
     <ProductImage product={product} />
-    {product.badge && <span class:list={['card__badge', { 'card__badge--accent': product.category === 'outlet' }]}>{product.badge}</span>}
+    {product.badge && <span class="card__badge">{product.badge}</span>}
   </a>
   <div class="card__body">
     <h3 class="card__name"><a href={href}>{product.name}</a></h3>
@@ -29,52 +27,51 @@ const href = withBase(productHref(product));
         product.price !== null ? (
           <>
             <strong>{formatPrice(product.price)}</strong>
-            {product.price_before && <s aria-label={`Antes ${formatPrice(product.price_before)}`}>{formatPrice(product.price_before)}</s>}
+            {product.price_before && <s><span class="sr">Antes </span>{formatPrice(product.price_before)}</s>}
           </>
         ) : (
           <strong class="card__ask">Consultar precio</strong>
         )
       }
     </p>
-    <div class="card__actions">
-      {
-        product.price === null ? (
-          <a class="btn btn--wa btn--block" href={whatsappHref(SITE.whatsapp, productMessage(product))} target="_blank" rel="noopener">
-            <Icon name="whatsapp" size={18} /> Consultar
-          </a>
-        ) : hasSizes ? (
-          <a class="btn btn--ghost btn--block" href={href}>Elegir talle <Icon name="arrow" size={18} /></a>
-        ) : (
-          <button
-            class="btn btn--primary btn--block"
-            type="button"
-            data-add-to-cart
-            data-id={product.id}
-            data-name={product.name}
-            data-price={product.price}
-          >
-            <Icon name="plus" size={18} /> Sumar al pedido
-          </button>
-        )
-      }
-    </div>
+    {
+      product.price === null ? (
+        <a class="btn btn--primary card__btn" href={whatsappHref(SITE.whatsapp, productMessage(product))} target="_blank" rel="noopener">Consultar por WhatsApp</a>
+      ) : product.sizes ? (
+        <button
+          class="btn card__btn"
+          type="button"
+          data-pick-size
+          data-id={product.id}
+          data-name={product.name}
+          data-price={product.price}
+          data-price-text={formatPrice(product.price)}
+          data-sizes={product.sizes.join(',')}
+          data-sizes-placeholder={product.sizes_is_placeholder ? '' : undefined}
+          data-href={href}
+        >
+          Elegir talle
+        </button>
+      ) : (
+        <button class="btn btn--primary card__btn" type="button" data-add-to-cart data-id={product.id} data-name={product.name} data-price={product.price}>
+          Sumar al pedido
+        </button>
+      )
+    }
   </div>
 </article>
 
 <style>
-  .card { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; transition: border-color 0.2s, transform 0.2s; }
-  .card:hover { border-color: var(--line-2); transform: translateY(-2px); }
+  .card { display: flex; flex-direction: column; gap: 1.1rem; }
   .card__media { position: relative; display: block; text-decoration: none; }
-  .card__badge { position: absolute; top: 0.7rem; left: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 999px; background: var(--accent); color: var(--bg); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
-  .card__badge--accent { background: var(--accent); }
-  .card__body { display: flex; flex-direction: column; gap: 0.5rem; padding: 1rem; flex: 1; }
-  .card__name { font-size: 1.55rem; }
+  .card__badge { position: absolute; top: 1rem; left: 1rem; padding: 0.4rem 0.65rem; background: var(--accent); color: var(--on-accent); font: 500 0.75rem var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; }
+  .card__body { display: flex; flex-direction: column; gap: 0.65rem; flex: 1; }
+  .card__name { font-size: 2rem; }
   .card__name a { text-decoration: none; }
   .card__name a:hover { color: var(--accent); }
-  .card__summary { color: var(--text-2); font-size: var(--fs-sm); flex: 1; }
-  .card__price { display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap; }
-  .card__price strong { font-size: 1.3rem; color: var(--text); }
-  .card__price s { color: var(--text-2); font-size: var(--fs-sm); }
-  .card__ask { color: var(--text) !important; font-size: 1.05rem !important; }
-  .card__actions { margin-top: 0.25rem; }
+  .card__summary { color: var(--text-2); flex: 1; text-wrap: pretty; }
+  .card__price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 0.9rem; }
+  .card__price strong { font: 900 2.125rem/1 var(--font-display); }
+  .card__ask { color: var(--text-3); }
+  .card__btn { align-self: flex-start; }
 </style>
