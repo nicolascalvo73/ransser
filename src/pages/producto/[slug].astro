@@ -26,7 +26,7 @@ const others = related(product);
 const description = `${product.summary} ${product.price !== null ? `${formatPrice(product.price)} (precio de ejemplo).` : 'Consultá el precio por WhatsApp.'}`;
 ---
 
-<BaseLayout title={`${product.name} | Ransser`} description={description} jsonLd={[productStructuredData(product, canonical)]}>
+<BaseLayout motion title={`${product.name} | Ransser`} description={description} jsonLd={[productStructuredData(product, canonical)]}>
   <article class="container pdp">
     <nav class="crumbs" aria-label="Migas de pan">
       <a href={withBase('/')}>Inicio</a> <span aria-hidden="true">/</span>

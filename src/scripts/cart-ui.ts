@@ -1,7 +1,8 @@
 // Conecta el DOM (header, drawer, botones "Sumar al pedido") con el store del carrito. Sin lógica de negocio.
-import { add, changeQty, clear, remove, subscribe } from '../lib/cart-store';
+import { add, changeQty, clear, getItems, remove, subscribe } from '../lib/cart-store';
 import { MAX_QTY, cartCount, cartTotal } from '../lib/cart';
 import { formatPrice } from '../lib/format';
+import { closeDialog, openDialog, pulse, wireDialog } from './dialog-motion';
 import type { CartItem } from '../types';
 
 const $ = <T extends Element>(sel: string, root: ParentNode = document) => root.querySelector<T>(sel);
@@ -32,8 +33,11 @@ const renderRow = (item: CartItem) => {
   return row;
 };
 
+let lastCount = cartCount(getItems());
 const render = (items: CartItem[]) => {
   const count = cartCount(items);
+  if (count > lastCount) pulse(badge);
+  lastCount = count;
   if (badge) badge.textContent = String(count);
   $('[data-cart-open]')?.setAttribute('aria-label', `Abrir tu pedido, ${count} ${count === 1 ? 'producto' : 'productos'}`);
   if (!list || !rowTpl) return;
@@ -45,12 +49,13 @@ const render = (items: CartItem[]) => {
 
 subscribe(render);
 
-const closeDrawer = () => drawer?.close();
+const closeDrawer = () => drawer && closeDialog(drawer, 'drawer');
+wireDialog(drawer, 'drawer');
 
 document.addEventListener('click', (e) => {
   const target = e.target as HTMLElement;
 
-  if (target.closest('[data-cart-open]')) return void drawer?.showModal();
+  if (target.closest('[data-cart-open]')) return void (drawer && openDialog(drawer, 'drawer'));
   if (target.closest('[data-cart-close]')) return closeDrawer();
   if (target === drawer) return closeDrawer(); // click en el backdrop
   if (target.closest('[data-cart-clear]')) {
@@ -139,10 +144,11 @@ const openSizeModal = (btn: HTMLElement) => {
     }),
   );
   setChosen(null);
-  modal.showModal();
+  openDialog(modal, 'modal');
 };
 
-const closeSizeModal = () => modal?.close();
+const closeSizeModal = () => modal && closeDialog(modal, 'modal');
+wireDialog(modal, 'modal');
 
 document.addEventListener('click', (e) => {
   const target = e.target as HTMLElement;

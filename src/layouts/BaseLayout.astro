@@ -22,9 +22,11 @@ interface Props {
   description?: string;
   noindex?: boolean;
   fab?: boolean;
+  /** Carga el movimiento GSAP (sólo home y fichas; /checkout no lo necesita). */
+  motion?: boolean;
   jsonLd?: object[];
 }
-const { title = SITE.title, description = SITE.description, noindex = false, fab = true, jsonLd = [] } = Astro.props;
+const { title = SITE.title, description = SITE.description, noindex = false, fab = true, motion = false, jsonLd = [] } = Astro.props;
 const siteUrl = new URL(withBase('/'), Astro.site).href;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImage = new URL(withBase('/og-image.jpg'), Astro.site).href;
@@ -71,5 +73,6 @@ const ogImage = new URL(withBase('/og-image.jpg'), Astro.site).href;
     <script>
       import '../scripts/cart-ui';
     </script>
+    {motion && <script>import '../scripts/motion';</script>}
   </body>
 </html>
