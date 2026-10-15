@@ -50,6 +50,9 @@ ransser/
 ## Accesibilidad
 Contraste AA, foco visible, teclado, `<dialog>` nativo en el drawer, `aria-live`, `prefers-reduced-motion`, objetivos ≥ 44 px.
 
+## Eventos
+- `src/data/events.json` validado en build con zod (`astro/zod`, sin dependencias nuevas); los vencidos se filtran en cada build. Componentes: `EventsSection`, `EventCard`, `EventFilters`; lógica pura en `lib/events.ts`; filtro con `scripts/events-filter.ts` (mejora progresiva). JSON-LD `Event` sólo para eventos reales (`ejemplo: false`). Ver `docs/eventos.md`.
+
 ## Vertical: catálogo y venta sin plataforma
 - **Catálogo:** `products.json` versionado en el repo.
 - **Carrito:** memoria + `localStorage` con `try/catch`.

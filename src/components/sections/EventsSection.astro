@@ -1,0 +1,89 @@
+---
+import { getUpcomingEvents } from '../../lib/events';
+import { eventStructuredData } from '../../lib/events';
+import { SITE } from '../../data/site';
+import { generalMessage, whatsappHref } from '../../lib/whatsapp';
+import { getImage } from '../../lib/images';
+import EventCard from '../ui/EventCard.astro';
+import EventFilters from '../ui/EventFilters.astro';
+import SplitTitle from '../ui/SplitTitle.astro';
+
+interface Props {
+  /** Número de "KM" del eyebrow, para mantener el orden de la landing. */
+  index?: number;
+}
+const { index = 4 } = Astro.props;
+
+// Los vencidos se descartan acá, en build time (ver docs/eventos.md).
+const events = getUpcomingEvents(new Date());
+const counts = events.reduce<Record<string, number>>((acc, e) => ({ ...acc, [e.tipo]: (acc[e.tipo] ?? 0) + 1 }), {});
+const hasExamples = events.some((e) => e.ejemplo);
+const featuredId = events.find((e) => e.destacado)?.id;
+
+// JSON-LD sólo de eventos reales: los de ejemplo no deben salir como datos estructurados.
+const siteUrl = Astro.site ? new URL(Astro.url.pathname, Astro.site).origin : '';
+const ld = events.filter((e) => !e.ejemplo).map((e) => eventStructuredData(e, e.imagen ? new URL(getImage(e.imagen).src, siteUrl || 'http://localhost').href : undefined));
+---
+
+<section class="container events" id="eventos" aria-labelledby="eventos-title" data-events>
+  <header class="events__head">
+    <div>
+      <p class="eyebrow" data-rv>KM {String(index).padStart(2, '0')} / Próximas salidas</p>
+      <h2 id="eventos-title" data-title><SplitTitle text="Eventos" /></h2>
+    </div>
+    <p class="events__tag" data-rv>Nos vemos en el camino. Rodadas, motoencuentros y rides donde vamos a estar: pasá a saludar.</p>
+  </header>
+
+  {hasExamples && <p class="events__note mono">Eventos de ejemplo: fechas, lugares y organizadores ficticios para la propuesta.</p>}
+
+  {
+    events.length > 0 ? (
+      <>
+        <EventFilters counts={counts} total={events.length} />
+        <p class="visually-hidden" role="status" aria-live="polite" data-events-live />
+        <ul class="ev-grid">
+          {events.map((e) => (<li class:list={{ 'is-feat': e.id === featuredId }} data-evento-item data-tipo={e.tipo}><EventCard event={e} featured={e.id === featuredId} /></li>))}
+        </ul>
+        <p class="events__none" data-events-none hidden>No hay eventos de ese tipo por ahora. Probá con otro filtro.</p>
+      </>
+    ) : (
+      <div class="events__empty" data-rv>
+        <p class="events__empty-t">Pronto vamos a anunciar las próximas salidas.</p>
+        <p>Seguinos en Instagram <a href={SITE.instagram} target="_blank" rel="noopener noreferrer">{SITE.instagramHandle}</a> para enterarte primero.</p>
+        <div class="events__empty-actions">
+          <a class="btn" href={SITE.instagram} target="_blank" rel="noopener noreferrer">Ir a Instagram</a>
+          <a class="btn btn--primary" href={whatsappHref(SITE.whatsapp, generalMessage())} target="_blank" rel="noopener noreferrer">Consultar por WhatsApp</a>
+        </div>
+      </div>
+    )
+  }
+
+  {ld.map((data) => <script type="application/ld+json" set:html={JSON.stringify(data)} />)}
+</section>
+
+<script>
+  import '../../scripts/events-filter';
+</script>
+
+<style>
+  .events { padding-block: 5rem; }
+  .events__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1.5rem; margin-bottom: 2rem; }
+  .events__head .eyebrow { margin-bottom: 0.75rem; }
+  h2 { font-size: clamp(3rem, 8vw, 8rem); line-height: 0.9; }
+  .events__tag { max-width: 26rem; color: var(--text-2); }
+  .events__note { margin-bottom: 1.5rem; padding: 0.6rem 0.9rem; border: 1px dashed var(--line-2); color: var(--text-2); font-size: 0.8125rem; }
+
+  .ev-grid { display: grid; gap: 1.25rem; grid-template-columns: 1fr; }
+  .ev-grid > li { display: flex; }
+  .ev-grid > li[hidden] { display: none; }
+  .ev-grid > li > :global(.ev) { flex: 1; }
+  @media (min-width: 640px) { .ev-grid { grid-template-columns: repeat(2, 1fr); } .ev-grid > li.is-feat { grid-column: 1 / -1; } }
+  @media (min-width: 1024px) { .ev-grid { grid-template-columns: repeat(3, 1fr); } .ev-grid > li.is-feat { grid-column: span 2; } }
+
+  .events__none { padding: 2rem 0; color: var(--text-2); }
+  .events__none[hidden] { display: none; }
+  .events__empty { display: flex; flex-direction: column; align-items: flex-start; gap: 1rem; padding: clamp(1.5rem, 5vw, 3.5rem); background: var(--surface); border: 1px solid var(--line); color: var(--text-3); }
+  .events__empty-t { font: 800 clamp(2rem, 4vw, 3.25rem)/1 var(--font-display); text-transform: uppercase; color: var(--text); }
+  .events__empty a:not(.btn) { color: var(--accent); }
+  .events__empty-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.5rem; }
+</style>

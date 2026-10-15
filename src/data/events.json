@@ -1,0 +1,73 @@
+[
+  {
+    "id": "ejemplo-rodada-caminos-de-tierra",
+    "tipo": "rodada",
+    "titulo": "Rodada por caminos de tierra",
+    "fecha": "2026-10-24T09:00:00-03:00",
+    "lugar": "Plaza principal",
+    "ciudad": "Ciudad de ejemplo",
+    "provincia": "Santa Fe",
+    "descripcion": "Salida grupal por caminos de tierra, ida y vuelta en el día. Nos juntamos en la plaza antes de arrancar.",
+    "tieneStand": true,
+    "linkInfo": "https://example.com/rodada-de-ejemplo",
+    "imagen": "evento-ejemplo-1",
+    "destacado": true,
+    "ejemplo": true
+  },
+  {
+    "id": "ejemplo-motoencuentro-primavera",
+    "tipo": "motoencuentro",
+    "titulo": "Motoencuentro de primavera",
+    "fecha": "2026-10-31T10:00:00-03:00",
+    "fechaFin": "2026-11-01T18:00:00-03:00",
+    "lugar": "Predio del lago",
+    "ciudad": "Ciudad de ejemplo",
+    "provincia": "Córdoba",
+    "descripcion": "Dos días de motos, comida y buena onda. Pasá por el stand a probarte las camperas y ver el camping.",
+    "tieneStand": true,
+    "linkInfo": "https://example.com/motoencuentro-de-ejemplo",
+    "imagen": "evento-ejemplo-2",
+    "destacado": false,
+    "ejemplo": true
+  },
+  {
+    "id": "ejemplo-ride-camping",
+    "tipo": "ride",
+    "titulo": "Ride de camping",
+    "fecha": "2026-11-07T08:30:00-03:00",
+    "lugar": "Camping municipal",
+    "ciudad": "Ciudad de ejemplo",
+    "provincia": "Buenos Aires",
+    "descripcion": "Salimos juntos, armamos campamento y volvemos al día siguiente. Llevá carpa, bolsa de dormir y ganas.",
+    "tieneStand": false,
+    "destacado": false,
+    "ejemplo": true
+  },
+  {
+    "id": "ejemplo-rodada-cierre-de-temporada",
+    "tipo": "rodada",
+    "titulo": "Rodada de cierre de temporada",
+    "fecha": "2026-11-21T15:00:00-03:00",
+    "lugar": "Club de motos",
+    "ciudad": "Ciudad de ejemplo",
+    "provincia": "Entre Ríos",
+    "descripcion": "Una vuelta tranquila para despedir la temporada. Todas las motos y todos los niveles son bienvenidos.",
+    "tieneStand": false,
+    "destacado": false,
+    "ejemplo": true
+  },
+  {
+    "id": "ejemplo-motoencuentro-fin-de-anio",
+    "tipo": "motoencuentro",
+    "titulo": "Motoencuentro de fin de año",
+    "fecha": "2026-12-05T11:00:00-03:00",
+    "lugar": "Predio ferial",
+    "ciudad": "Ciudad de ejemplo",
+    "provincia": "Santa Fe",
+    "descripcion": "Cierre del año con rodada y encuentro. Ransser lleva el stand con camperas, pantalones y camping.",
+    "tieneStand": true,
+    "imagen": "evento-ejemplo-3",
+    "destacado": false,
+    "ejemplo": true
+  }
+]

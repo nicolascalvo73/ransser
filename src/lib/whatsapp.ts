@@ -1,5 +1,6 @@
 import { cartTotal } from './cart';
 import { formatPrice } from './format';
+import type { Evento } from '../data/events.schema';
 import type { CartItem, CustomerData, Product } from '../types';
 
 export const whatsappHref = (number: string, message: string) =>
@@ -32,3 +33,7 @@ export const orderMessage = (items: CartItem[], customer?: Partial<CustomerData>
     'Me confirmás stock, talles y costo de envío?',
   ].join('\n');
 };
+
+/** Consulta por un evento: nombra el evento y la fecha. */
+export const eventMessage = (e: Pick<Evento, 'titulo' | 'lugar' | 'ciudad' | 'tieneStand'>, dateLong: string) =>
+  `Hola Ransser! Vi el evento "${e.titulo}" (${dateLong}) en ${e.lugar}, ${e.ciudad}. ${e.tieneStand ? 'Me pasás info sobre el stand?' : 'Me pasás más info?'}`;

@@ -8,6 +8,7 @@ import { SITE } from '../../data/site';
 const home = withBase('/');
 const links = [
   ...CATEGORIES.map((c) => ({ href: `${home}#${c.id}`, label: c.name })),
+  { href: `${home}#eventos`, label: 'Eventos' },
   { href: `${home}#envios`, label: 'Envíos' },
   { href: `${home}#contacto`, label: 'Contacto' },
 ];

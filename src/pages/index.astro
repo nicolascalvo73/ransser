@@ -5,6 +5,7 @@ import Hero from '../components/sections/Hero.astro';
 import Categories from '../components/sections/Categories.astro';
 import ComboBanner from '../components/sections/ComboBanner.astro';
 import ProductSection from '../components/sections/ProductSection.astro';
+import EventsSection from '../components/sections/EventsSection.astro';
 import Shipping from '../components/sections/Shipping.astro';
 import AskAbout from '../components/sections/AskAbout.astro';
 import Contact from '../components/sections/Contact.astro';
@@ -20,6 +21,7 @@ const MIN = { indumentaria: 270, camping: 360, outlet: 320 } as const;
   <Categories />
   <ComboBanner />
   {CATEGORIES.map((c, i) => (<ProductSection category={c} products={productsByCategory(c.id)} index={i} min={MIN[c.id]} />))}
+  <EventsSection index={4} />
   <Shipping />
   <AskAbout />
   <Contact />

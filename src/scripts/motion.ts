@@ -23,5 +23,7 @@ mm.add({ ok: '(prefers-reduced-motion: no-preference)', fine: '(hover: hover) an
   // Las fuentes y las imágenes cambian la altura de la página: se recalculan las posiciones.
   document.fonts?.ready.then(() => ScrollTrigger.refresh());
   window.addEventListener('load', () => ScrollTrigger.refresh(), { once: true });
+  // El filtro de eventos cambia el alto de la página.
+  window.addEventListener('events:filtered', () => ScrollTrigger.refresh());
   return () => document.documentElement.classList.remove('has-motion');
 });

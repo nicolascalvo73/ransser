@@ -25,6 +25,8 @@ No hay verde ni amarillo: WhatsApp también va en naranja y negro. Los errores d
 - Etiquetas, precios chicos y datos: **DM Mono** 400/500.
 - Las fuentes del primer pantallazo se precargan (evita saltos de layout).
 
+**Eventos** (`#eventos`): cards de próximas rodadas, motoencuentros y rides con filtro por tipo, fecha grande en es-AR, sello de stand en naranja, y acciones "Consultar por WhatsApp" (con evento y fecha), "Cómo llegar" (Google Maps) y "Más info". Como la paleta es sólo negro y naranja, los tipos se distinguen con variantes de la misma paleta: rodada = naranja relleno, motoencuentro = hueso relleno, ride = naranja contorno. Datos y cómo cargarlos: `docs/eventos.md`.
+
 **Movimiento** (GSAP + ScrollTrigger, `src/scripts/motion.ts`): intro del hero, marquee ligado al scroll, progreso, nav que se esconde al bajar, títulos por palabra, reveals, zoom de fotos, ruta de Envíos, y drawer/modal animados. Respeta `prefers-reduced-motion`, y si GSAP falla el contenido queda visible (nada se oculta por CSS). `/checkout` no carga GSAP.
 
 **Logo:** el real del perfil de Instagram (velocímetro con alas, "RANSSER 1993"). Sólo hay 100×100 px: se usa a ≤ 48 px de alto. No se redibuja ni se vectoriza sin autorización; en el informe se pide el archivo original.

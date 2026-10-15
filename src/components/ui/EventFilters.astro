@@ -1,0 +1,26 @@
+---
+import { TYPE_LABEL_PLURAL } from '../../lib/events';
+import { EVENT_TYPES } from '../../data/events.schema';
+
+interface Props {
+  /** Cantidad de eventos por tipo (sólo informativo). */
+  counts: Record<string, number>;
+  total: number;
+}
+const { counts, total } = Astro.props;
+const chips = [{ id: 'todos', label: 'Todos', n: total }, ...EVENT_TYPES.map((t) => ({ id: t, label: TYPE_LABEL_PLURAL[t], n: counts[t] ?? 0 }))];
+---
+
+<!-- Sin JS no hay filtro: la barra queda oculta y se ven todos los eventos. El script la muestra. -->
+<div class="filters" role="group" aria-label="Filtrar eventos por tipo" data-filters hidden>
+  {chips.map((c) => (<button class="chip" type="button" data-filter={c.id} aria-pressed={c.id === 'todos' ? 'true' : 'false'}>{c.label} <span class="chip__n">{c.n}</span></button>))}
+</div>
+
+<style>
+  .filters { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2rem; }
+  .filters[hidden] { display: none; }
+  .chip { display: inline-flex; align-items: center; gap: 0.6rem; min-height: var(--tap); padding: 0 1.1rem; background: transparent; border: 1.5px solid var(--line-2); color: var(--text); font: 600 0.95rem var(--font-body); cursor: pointer; transition: background-color 0.2s, border-color 0.2s, color 0.2s; }
+  .chip:hover { border-color: var(--text); }
+  .chip[aria-pressed='true'] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  .chip__n { font: 500 0.8125rem var(--font-mono); opacity: 0.8; }
+</style>
