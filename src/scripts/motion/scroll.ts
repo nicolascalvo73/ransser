@@ -2,6 +2,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger as ST } from 'gsap/ScrollTrigger';
 
 const q = (sel: string) => gsap.utils.toArray<HTMLElement>(sel);
+const has = (sel: string) => document.querySelector(sel) !== null;
 
 /** Todo lo atado al scroll: progreso, nav, parallax, títulos, reveals, zoom de fotos, ruta de Envíos y footer. */
 export const scrollEffects = () => {
@@ -29,8 +30,10 @@ export const scrollEffects = () => {
 
   // Hero: parallax. La foto es 28 % más alta que su marco; 9 % de desplazamiento propio nunca deja huecos.
   const hero = { trigger: '[data-g="hero"]', start: 'top top', end: 'bottom top', scrub: true };
-  gsap.to('[data-hero-photo-inner]', { yPercent: 9, ease: 'none', scrollTrigger: hero });
-  gsap.to('[data-hero-title]', { xPercent: -4, ease: 'none', scrollTrigger: hero });
+  if (has('[data-g="hero"]')) {
+    gsap.to('[data-hero-photo-inner]', { yPercent: 9, ease: 'none', scrollTrigger: hero });
+    gsap.to('[data-hero-title]', { xPercent: -4, ease: 'none', scrollTrigger: hero });
+  }
 
   // Títulos: palabra por palabra.
   q('[data-title]').forEach((t) => {
@@ -39,7 +42,7 @@ export const scrollEffects = () => {
   });
 
   // Reveals en lote.
-  gsap.set('[data-rv]', { y: 64, opacity: 0 });
+  if (has('[data-rv]')) gsap.set('[data-rv]', { y: 64, opacity: 0 });
   ST.batch('[data-rv]', {
     start: 'top 90%',
     once: true,
@@ -51,7 +54,7 @@ export const scrollEffects = () => {
     gsap.fromTo(el, { scale: 1.3 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom 45%', scrub: true } }),
   );
 
-  gsap.to('[data-stripes]', { xPercent: -25, ease: 'none', scrollTrigger: { trigger: '#promo', start: 'top bottom', end: 'bottom top', scrub: true } });
-  gsap.fromTo('[data-line]', { scaleX: 0, transformOrigin: '0 50%' }, { scaleX: 1, ease: 'none', scrollTrigger: { trigger: '[data-steps]', start: 'top 78%', end: 'bottom 55%', scrub: true } });
-  gsap.from('[data-bigword]', { yPercent: 45, ease: 'none', scrollTrigger: { trigger: '[data-g="footer"]', start: 'top bottom', end: 'bottom bottom', scrub: true } });
+  if (has('#promo')) gsap.to('[data-stripes]', { xPercent: -25, ease: 'none', scrollTrigger: { trigger: '#promo', start: 'top bottom', end: 'bottom top', scrub: true } });
+  if (has('[data-steps]')) gsap.fromTo('[data-line]', { scaleX: 0, transformOrigin: '0 50%' }, { scaleX: 1, ease: 'none', scrollTrigger: { trigger: '[data-steps]', start: 'top 78%', end: 'bottom 55%', scrub: true } });
+  if (has('[data-bigword]')) gsap.from('[data-bigword]', { yPercent: 45, ease: 'none', scrollTrigger: { trigger: '[data-g="footer"]', start: 'top bottom', end: 'bottom bottom', scrub: true } });
 };

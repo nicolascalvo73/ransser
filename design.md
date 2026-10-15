@@ -6,26 +6,26 @@ Basado en `research.json` (2026-10-14; datos de capturas del 2026-10-01). Vertic
 
 **Concepto:** "Hecho para el camino". Indumentaria y accesorios para moteros que viajan y acampan, contados como lo hace el dueño en sus Reels: real, de ruta de tierra, sin estudio. Oscuro y técnico, pero cercano.
 
-**Paleta** (el coral está muestreado del logo de Instagram)
+**Paleta** (sólo negro y el naranja de marca; referencia: `docs/diseno-referencia.html`)
 
 | Rol | Color | Uso |
 |---|---|---|
-| Base | Carbón `#0E0F10` | Fondo general |
-| Superficie | `#17191B` / `#202326` | Cards, drawer, formularios |
-| Línea | `#2E3236` | Bordes y separadores |
-| Acento | Coral Ransser `#E45A52` | CTAs, precio, foco, detalles del logo (texto oscuro sobre coral) |
-| Secundario | Verde oliva `#5E6E3B` / claro `#9DB06A` | Camping, badges de categoría, estados "ok" |
-| Apoyo | Arena `#CDBF9B`, azul marino `#1F2F46`, gris `#A7ABAE` | Etiquetas, fondos de bloque, texto secundario |
-| Texto | Hueso `#F1EFEA` | Texto principal sobre oscuro |
-| Puntuales | Flúor `#D4FF2A` (badge Outlet), bordó `#7A1F2B` (ilustración de hamaca/bolsa) | Sólo detalles, nunca bloques grandes |
-| Semántico | Verde WhatsApp `#25D366` | Sólo botón/FAB de WhatsApp |
+| Fondo | `#0E0F10` | Base |
+| Superficie | `#17191B` (y `#141618` en drawer/modal) | Cards de contacto, drawer, formularios |
+| Línea | `#2A2D30` (`#3A3D40` en bordes de controles) | Separadores |
+| Texto | `#F1F0EA`; secundario `#A4A6A1`; terciario `#C9CAC4` | Contenido |
+| Acento | Naranja `#FF6B1A` | Único acento: CTAs, precios en ficha, etiquetas mono, foco (3 px) |
+| Sobre naranja | `#0E0F10` | El texto sobre naranja siempre es negro (contraste 6,7:1) |
 
-Contraste verificado: texto hueso sobre carbón y texto carbón sobre coral superan AA (≥ 4,5:1). El coral nunca lleva texto blanco.
+No hay verde ni amarillo: WhatsApp también va en naranja y negro. Los errores de formulario usan naranja con el prefijo "Error:" y `aria-invalid`.
 
-**Tipografía** (self-hosted vía `@fontsource`, `font-display: swap`)
-- Títulos: **Saira Extra Condensed** 700/800, en mayúsculas: ecos del tablero y del estampado del logo, angosta para nombres largos de producto.
-- Cuerpo y precios: **Inter** variable.
-- Escala fluida con `clamp()` desde 360 px.
+**Tipografía** (self-hosted vía `@fontsource`, sin Google Fonts)
+- Títulos: **Big Shoulders Display** 800/900 en mayúsculas.
+- Texto: **Instrument Sans** 400/500/600.
+- Etiquetas, precios chicos y datos: **DM Mono** 400/500.
+- Las fuentes del primer pantallazo se precargan (evita saltos de layout).
+
+**Movimiento** (GSAP + ScrollTrigger, `src/scripts/motion.ts`): intro del hero, marquee ligado al scroll, progreso, nav que se esconde al bajar, títulos por palabra, reveals, zoom de fotos, ruta de Envíos, y drawer/modal animados. Respeta `prefers-reduced-motion`, y si GSAP falla el contenido queda visible (nada se oculta por CSS). `/checkout` no carga GSAP.
 
 **Logo:** el real del perfil de Instagram (velocímetro con alas, "RANSSER 1993"). Sólo hay 100×100 px: se usa a ≤ 48 px de alto. No se redibuja ni se vectoriza sin autorización; en el informe se pide el archivo original.
 

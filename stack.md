@@ -37,7 +37,8 @@ ransser/
 
 ## Performance
 - Imágenes reales descargadas → **WebP** con `sharp` (script `npm run images`), `astro:assets`/`<Image>` con dimensiones explícitas (sin CLS); hero con `fetchpriority="high"`, el resto `lazy`.
-- Fuentes self-hosted (`@fontsource`), subset latino, `swap`.
+- Fuentes self-hosted (`@fontsource`: Big Shoulders Display, Instrument Sans, DM Mono), subset latino, `swap`, con preload de las 4 del primer pantallazo.
+- Movimiento: `gsap` + ScrollTrigger sólo en home y fichas (~46 KB gzip); el drawer y el modal lo cargan bajo demanda, así `/checkout` queda sin GSAP.
 - Placeholders de producto son SVG inline (0 requests).
 - CSS por componente + tokens globales, sin framework CSS.
 

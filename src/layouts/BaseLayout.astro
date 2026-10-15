@@ -11,6 +11,10 @@ import '../styles/global.css';
 import { SITE } from '../data/site';
 import { storeStructuredData } from '../lib/seo';
 import { withBase } from '../lib/url';
+import bs900 from '@fontsource/big-shoulders-display/files/big-shoulders-display-latin-900-normal.woff2?url';
+import is400 from '@fontsource/instrument-sans/files/instrument-sans-latin-400-normal.woff2?url';
+import is600 from '@fontsource/instrument-sans/files/instrument-sans-latin-600-normal.woff2?url';
+import dm500 from '@fontsource/dm-mono/files/dm-mono-latin-500-normal.woff2?url';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import WhatsAppFab from '../components/layout/WhatsAppFab.astro';
@@ -29,6 +33,8 @@ interface Props {
 const { title = SITE.title, description = SITE.description, noindex = false, fab = true, motion = false, jsonLd = [] } = Astro.props;
 const siteUrl = new URL(withBase('/'), Astro.site).href;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
+// Fuentes del primer pantallazo: se precargan para que el cambio desde la fuente de reserva no mueva el layout.
+const preloadFonts = [bs900, is400, is600, dm500];
 const ogImage = new URL(withBase('/og-image.jpg'), Astro.site).href;
 ---
 
@@ -41,6 +47,7 @@ const ogImage = new URL(withBase('/og-image.jpg'), Astro.site).href;
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0e0f10" />
     {noindex && <meta name="robots" content="noindex" />}
+    {preloadFonts.map((href) => <link rel="preload" as="font" type="font/woff2" href={href} crossorigin />)}
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/png" sizes="32x32" href={withBase('/favicon-32.png')} />
     <link rel="icon" type="image/png" sizes="96x96" href={withBase('/favicon-96.png')} />
